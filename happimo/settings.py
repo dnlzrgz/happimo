@@ -52,9 +52,15 @@ INSTALLED_APPS = [
     # Static files
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
-    # 3rd party
+    # django-allauth
+    "allauth",
+    "allauth.account",
+    # Debug
     "debug_toolbar",
     "django_browser_reload",
+    # Local
+    "accounts",
+    "pages",
 ]
 
 MIDDLEWARE = [
@@ -65,6 +71,7 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django_browser_reload.middleware.BrowserReloadMiddleware",
@@ -85,6 +92,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.request",
             ],
         },
     },
@@ -124,6 +132,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
@@ -160,6 +173,65 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# Custom user accounts
+# https://docs.djangoproject.com/en/5.0/topics/auth/customizing/
+
+AUTH_USER_MODEL = "accounts.User"
+
+LOGIN_REDIRECT_URL = env.str(
+    "LOGIN_REDIRECT_URL",
+    "home",
+)
+
+LOGOUT_REDIRECT_URL = env.str(
+    "LOGOUT_REDIRECT_URL",
+    "home",
+)
+
+
+# Allauth config
+# https://docs.allauth.org/en/latest/index.html
+
+ACCOUNT_EMAIL_REQUIRED = env.bool(
+    "ACCOUNT_EMAIL_REQUIRED",
+    True,
+)
+
+ACCOUNT_USERNAME_REQUIRED = env.bool(
+    "ACCOUNT_USERNAME_REQUIRED",
+    False,
+)
+
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = env.bool(
+    "ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE",
+    True,
+)
+
+ACCOUNT_SESSION_REMEMBER = env.bool(
+    "ACCOUNT_SESSION_REMEMBER",
+    True,
+)
+
+ACCOUNT_AUTHENTICATION_METHOD = env.str(
+    "ACCOUNT_AUTHENTICATION_METHOD",
+    "email",
+)
+
+ACCOUNT_UNIQUE_EMAIL = env.bool(
+    "ACCOUNT_UNIQUE_EMAIL",
+    True,
+)
+
+
+# Email
+# https://docs.djangoproject.com/en/5.0/topics/email
+
+EMAIL_BACKEND = env.str(
+    "EMAIL_BACKEND",
+    "django.core.mail.backends.console.EmailBackend",
+)
 
 
 # Logging

@@ -1,0 +1,33 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      {% block title %}
+      {% endblock title %}
+    </title>
+
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+
+    {% block extra_css %}
+    {% endblock extra_css %}
+  </head>
+  <body>
+    {% block content %}
+    {% endblock content %}
+
+    <!-- htmx -->
+    {% if debug %}
+      <script src="{% static 'js/htmx.js'}" defer></script>
+      <script src="{% static 'js/debug.js'}" defer></script>
+    {% else %}
+      <script src="{% static 'js/htmx.min.js'}" defer></script>
+    {% endif %}
+
+    {% block extra_js %}
+    {% endblock extra_js %}
+  </body>
+</html>
