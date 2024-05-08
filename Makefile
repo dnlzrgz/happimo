@@ -10,6 +10,7 @@ lint:
 	@echo "🔍 Linting..."
 	ruff check . --fix
 	djhtml .
+	pre-commit run --all-files
 	@echo "✨ Linting complete!"
 
 # Check using Django's system-check

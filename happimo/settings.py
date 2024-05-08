@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     "allauth.account",
     # Local
     "accounts",
+    "moods",
     "pages",
 ]
 
@@ -191,6 +192,17 @@ else:
         }
 
 CACHE_TIMEOUT_SECONDS = env.int("CACHE_TIMEOUT_SECONDS", 0)
+
+
+# Sqids settings
+# # https://github.com/julianwachholz/django-sqids
+
+SQIDS_MIN_LENGTH = env.int("SQIDS_MIN_LENGTH", 5)
+
+SQIDS_MIN_ALPHABET = env.str(
+    "SQIDS_MIN_ALPHABET",
+    "9FbwkL2mUvroAlcWsxi8NgGt7nDTjQMzI1Hfq6KyP0VeO5dZJCpYBaRS4Euh3X",
+)
 
 
 # Password validation
