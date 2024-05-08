@@ -129,7 +129,44 @@ DATABASES = {
     }
 }
 
-DATABASES["default"]["ATOMIC_REQUESTS"] = True
+DATABASES["default"]["ATOMIC_REQUESTS"] = env.bool(
+    "DATABASE_ATOMIC_REQUESTS",
+    True,
+)
+
+
+# Cache
+# https://docs.djangoproject.com/en/5.0/topics/cache/
+
+if env.bool("USE_REDIS", False):
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.redis.RedisCache",
+            "LOCATION": env.str("REDIS_LOCATION", ""),
+        }
+    }
+elif env.bool("USE_MEMCACHE", False):
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
+            "LOCATION": env.str("MEMCACHE_LOCATION", ""),
+        }
+    }
+else:
+    if DEBUG:
+        CACHES = {
+            "default": {
+                "BACKEND": "django.core.cache.backends.dummy.DummyCache",
+            }
+        }
+    else:
+        CACHES = {
+            "default": {
+                "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+            }
+        }
+
+CACHE_TIMEOUT_SECONDS = env.int("CACHE_TIMEOUT_SECONDS", 0)
 
 
 # Password validation
