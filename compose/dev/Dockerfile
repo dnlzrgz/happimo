@@ -22,8 +22,6 @@ WORKDIR /app
 
 EXPOSE 8000
 
-HEALTHCHECK CMD curl --fail http://localhost:8000 || exit 1
-
 COPY --from=build-stage /app/wheels /wheels
 COPY --from=build-stage /app/requirements.dev.txt .
 COPY . .

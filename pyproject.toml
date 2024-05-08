@@ -10,12 +10,12 @@ readme = "README.md"
 python = "^3.12"
 django = "^5.0.4"
 environs = "^11.0.0"
-psycopg = "^3.1.18"
 django-allauth = "^0.62.1"
 whitenoise = {extras = ["brotli"], version = "^6.6.0"}
 django-sqids = "^0.2.0"
 pymemcache = "^4.0.0"
 redis = {extras = ["hiredis"], version = "^5.0.4"}
+psycopg = {extras = ["binary"], version = "^3.1.18"}
 
 
 [tool.poetry.group.dev.dependencies]
