@@ -64,13 +64,17 @@ INSTALLED_APPS = [
     # django-allauth
     "allauth",
     "allauth.account",
-    # Debug
-    "debug_toolbar",
-    "django_browser_reload",
     # Local
     "accounts",
     "pages",
 ]
+
+if DEBUG:
+    INSTALLED_APPS += [
+        "debug_toolbar",
+        "django_browser_reload",
+        "silk",
+    ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -82,9 +86,14 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "allauth.account.middleware.AccountMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
-    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
+
+if DEBUG:
+    MIDDLEWARE += [
+        "debug_toolbar.middleware.DebugToolbarMiddleware",
+        "django_browser_reload.middleware.BrowserReloadMiddleware",
+        "silk.middleware.SilkyMiddleware",
+    ]
 
 ROOT_URLCONF = "happimo.urls"
 
@@ -241,6 +250,14 @@ EMAIL_BACKEND = env.str(
     "EMAIL_BACKEND",
     "django.core.mail.backends.console.EmailBackend",
 )
+
+
+# Silk
+# https://github.com/jazzband/django-silk
+
+SILKY_AUTHENTICATION = env.bool("SILKY_AUTHENTICATION", True)
+
+SILKY_AUTHORISATION = env.bool("SILKY_AUTHORISATION", True)
 
 
 # Logging
