@@ -15,7 +15,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env.str(
-    "DJANGO_SECRET_KEY",
+    "SECRET_KEY",
     "django-insecure-&*5$6q%@%+$43rb)adunu3ao&myzyu!y*3o(^ra7*m1&n!o-p^",
 )
 
@@ -38,6 +38,15 @@ ADMIN_URL = env.str(
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+if DEBUG:
+    import socket
+
+    hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+    INTERNAL_IPS = [ip[: ip.rfind(".")] + ".1" for ip in ips] + [
+        "127.0.0.1",
+        "10.0.2.2",
+    ]
 
 
 # Application definition

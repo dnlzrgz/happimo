@@ -1,0 +1,38 @@
+volumes:
+  happimo_dev_postgres_data: {}
+  happimo_dev_postgres_data_backups: {}
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: ./compose/dev/Dockerfile
+    image: happimo_dev
+    container_name: happimo_dev_django
+    depends_on:
+      - postgres
+      - mailpit
+      - memcached
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+
+  postgres:
+    image: postgres:16.2-alpine3.19
+    container_name: happimo_dev_postgres
+    volumes:
+      - happimo_dev_postgres_data:/var/lib/postgresql/data
+      - happimo_dev_postgres_data_backups:/backups
+
+  memcached:
+    image: memcached:1.6.27-alpine3.19
+    container_name: happimo_dev_memcached
+    depends_on:
+      - postgres
+
+  mailpit:
+    image: axllent/mailpit:v1.18
+    container_name: happimo_dev_mailpit
+    ports:
+      - "8025:8025"

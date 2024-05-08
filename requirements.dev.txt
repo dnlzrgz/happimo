@@ -13,7 +13,7 @@ django-browser-reload==1.12.1 ; python_version >= "3.12" and python_version < "4
 django-debug-toolbar==4.3.0 ; python_version >= "3.12" and python_version < "4.0"
 django-silk==5.1.0 ; python_version >= "3.12" and python_version < "4.0"
 django-sqids==0.2.0 ; python_version >= "3.12" and python_version < "4"
-django==5.0.4 ; python_version >= "3.12" and python_version < "4.0"
+django==5.0.6 ; python_version >= "3.12" and python_version < "4.0"
 djhtml==3.0.6 ; python_version >= "3.12" and python_version < "4.0"
 environs==11.0.0 ; python_version >= "3.12" and python_version < "4.0"
 filelock==3.14.0 ; python_version >= "3.12" and python_version < "4.0"
