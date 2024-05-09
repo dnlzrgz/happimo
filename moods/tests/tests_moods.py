@@ -1,97 +1,14 @@
 import random
 from http import HTTPStatus
-from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
-from faker import Faker
 from moods.models import Mood
-
-fake = Faker()
-
-FEELINGS_LIST = [
-    "Happy",
-    "Sad",
-    "Angry",
-    "Excited",
-    "Anxious",
-    "Content",
-    "Depressed",
-    "Euphoric",
-    "Grateful",
-    "Guilty",
-    "Lonely",
-    "Loved",
-    "Melancholy",
-    "Optimistic",
-    "Proud",
-    "Relaxed",
-    "Stressed",
-    "Surprised",
-    "Tired",
-    "Confused",
-]
-
-EMOJIS_LIST = [
-    "😊",
-    "😢",
-    "😠",
-    "😃",
-    "😨",
-    "😌",
-    "😞",
-    "😆",
-    "😇",
-    "😬",
-    "😔",
-    "😍",
-    "😐",
-    "😎",
-    "😤",
-    "😴",
-    "😱",
-    "😳",
-    "😪",
-    "🤔",
-]
+from utils.dummy import FEELINGS_LIST, EMOJIS_LIST
+from utils.test import create_fake_user, create_fake_mood
+from utils.test_mixins import TestAuthenticatedViewAccessMixin
 
 
-def create_fake_user():
-    credentials = {
-        "username": fake.name(),
-        "email": fake.email(),
-        "password": fake.password(),
-    }
-
-    user = get_user_model().objects.create_user(**credentials)
-
-    return (credentials, user)
-
-
-def create_fake_mood(user):
-    mood = Mood.objects.create(
-        user=user,
-        name=random.choice(FEELINGS_LIST),
-        icon=random.choice(EMOJIS_LIST),
-    )
-
-    return mood
-
-
-class AuthenticatedViewAccessMixin:
-    def test_authenticated_user_can_access_view(self):
-        self.client.login(**self.credentials)
-        response = self.client.get(self.url)
-
-        self.assertEqual(response.status_code, HTTPStatus.OK.value)
-        self.assertTemplateUsed(response, self.template_name)
-
-    def test_unauthenticated_user_can_not_access_view(self):
-        response = self.client.get(self.url)
-
-        self.assertEqual(response.status_code, HTTPStatus.FOUND.value)
-
-
-class MoodListViewTest(TestCase, AuthenticatedViewAccessMixin):
+class MoodListViewTest(TestCase, TestAuthenticatedViewAccessMixin):
     def setUp(self):
         self.credentials, self.user = create_fake_user()
         self.url = reverse("mood_list")
@@ -117,7 +34,7 @@ class MoodListViewTest(TestCase, AuthenticatedViewAccessMixin):
         self.assertNotContains(response, mood.icon)
 
 
-class MoodCreateViewTest(TestCase, AuthenticatedViewAccessMixin):
+class MoodCreateViewTest(TestCase, TestAuthenticatedViewAccessMixin):
     def setUp(self):
         self.credentials, self.user = create_fake_user()
         self.url = reverse("mood_create")
@@ -138,7 +55,7 @@ class MoodCreateViewTest(TestCase, AuthenticatedViewAccessMixin):
         )
 
 
-class MoodUpdateViewTest(TestCase, AuthenticatedViewAccessMixin):
+class MoodUpdateViewTest(TestCase, TestAuthenticatedViewAccessMixin):
     def setUp(self):
         self.credentials, self.user = create_fake_user()
         self.mood = create_fake_mood(self.user)
@@ -176,7 +93,7 @@ class MoodUpdateViewTest(TestCase, AuthenticatedViewAccessMixin):
         self.assertFalse(Mood.objects.filter(name=new_mood_data["name"]).exists())
 
 
-class MoodDeleteViewTest(TestCase, AuthenticatedViewAccessMixin):
+class MoodDeleteViewTest(TestCase, TestAuthenticatedViewAccessMixin):
     def setUp(self):
         self.credentials, self.user = create_fake_user()
         self.mood = create_fake_mood(self.user)

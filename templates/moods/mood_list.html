@@ -4,6 +4,7 @@
 
 {% block content %}
   <h1>Moods</h1>
+  <a href="{% url 'mood_create' %}">Add</a>
 
   <ul>
     {% for mood in moods %}

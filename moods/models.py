@@ -34,11 +34,15 @@ class Activity(models.Model):
 
     name = models.CharField(max_length=75)
 
+    def get_absolute_url(self):
+        return reverse("activity_update", kwargs={"slug": self.sqid})
+
     def __str__(self):
         return f"{self.name}"
 
     class Meta:
         verbose_name_plural = "activities"
+        ordering = ["-name"]
 
 
 class Entry(models.Model):

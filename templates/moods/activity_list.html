@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Activities{% endblock title %}
+
+{% block content %}
+  <h1>Activities</h1>
+  <a href="{% url 'activity_create' %}">Add</a>
+
+  <ul>
+    {% for activity in activities %}
+      <li>
+        <span>{{activity.name}}</span>
+        <a href="{% url 'activity_update' activity.sqid %}">Edit</a>
+        <a href="{% url 'activity_delete' activity.sqid %}">Delete</a>
+      </li>
+    {% empty %}
+      <p>You don't have any activities added yet!</p>
+    {% endfor %}
+  </ul>
+{% endblock content %}
