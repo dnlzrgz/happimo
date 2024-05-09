@@ -1,6 +1,7 @@
 from django.db import models
-from django.conf import settings
 from django.db.models.functions.datetime import timezone
+from django.conf import settings
+from django.urls import reverse
 from django_sqids import SqidsField
 
 
@@ -14,8 +15,14 @@ class Mood(models.Model):
     name = models.CharField(max_length=75)
     icon = models.CharField(max_length=4)
 
+    def get_absolute_url(self):
+        return reverse("mood_update", kwargs={"slug": self.sqid})
+
     def __str__(self):
         return f"{self.icon} {self.name}"
+
+    class Meta:
+        ordering = ["-name"]
 
 
 class Activity(models.Model):

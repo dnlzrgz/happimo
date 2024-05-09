@@ -26,6 +26,7 @@ ruff = "^0.4.3"
 django-browser-reload = "^1.12.1"
 django-silk = "^5.1.0"
 django-debug-toolbar = "^4.3.0"
+faker = "^25.1.0"
 
 [build-system]
 requires = ["poetry-core"]

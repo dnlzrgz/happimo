@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Moods{% endblock title %}
+
+{% block content %}
+  <h1>Moods</h1>
+
+  <ul>
+    {% for mood in moods %}
+      <li>
+        <span>{{ mood.icon}} {{mood.name}}</span>
+        <a href="{% url 'mood_update' mood.sqid %}">Edit</a>
+        <a href="{% url 'mood_delete' mood.sqid %}">Delete</a>
+      </li>
+    {% empty %}
+      <p>You don't have any moods added yet!</p>
+    {% endfor %}
+  </ul>
+{% endblock content %}
