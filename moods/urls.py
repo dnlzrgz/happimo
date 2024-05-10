@@ -1,5 +1,10 @@
 from django.urls import path
-
+from moods.views.entry_views import (
+    EntryCreateView,
+    EntryDeleteView,
+    EntryUpdateView,
+    EntryListView,
+)
 from moods.views.mood_views import (
     MoodCreateView,
     MoodDeleteView,
@@ -14,6 +19,26 @@ from moods.views.activity_views import (
 )
 
 urlpatterns = [
+    path(
+        "",
+        EntryListView.as_view(),
+        name="entry_list",
+    ),
+    path(
+        "entries/create/",
+        EntryCreateView.as_view(),
+        name="entry_create",
+    ),
+    path(
+        "entries/update/<slug>",
+        EntryUpdateView.as_view(),
+        name="entry_update",
+    ),
+    path(
+        "entries/delete/<slug>",
+        EntryDeleteView.as_view(),
+        name="entry_delete",
+    ),
     path(
         "moods/",
         MoodListView.as_view(),

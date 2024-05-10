@@ -14,7 +14,6 @@ class MoodListView(LoginRequiredMixin, ListView):
     model = Mood
     context_object_name = "moods"
     template_name = "moods/mood_list.html"
-    ordering = ["name"]
 
     def get_queryset(self):
         return Mood.objects.filter(user=self.request.user)

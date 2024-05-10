@@ -7,23 +7,23 @@ from django.views.generic import (
     UpdateView,
 )
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from moods.models import Activity
+from moods.models import Entry
 
 
-class ActivityListView(LoginRequiredMixin, ListView):
-    model = Activity
-    context_object_name = "activities"
-    template_name = "moods/activity_list.html"
+class EntryListView(LoginRequiredMixin, ListView):
+    model = Entry
+    context_object_name = "entries"
+    template_name = "moods/entry_list.html"
 
     def get_queryset(self):
-        return Activity.objects.filter(user=self.request.user)
+        return Entry.objects.filter(user=self.request.user)
 
 
-class ActivityCreateView(LoginRequiredMixin, CreateView):
-    model = Activity
-    fields = ["name"]
+class EntryCreateView(LoginRequiredMixin, CreateView):
+    model = Entry
+    fields = ["mood", "activities", "note_title", "note_body", "date", "time"]
     slug_field = "sqid"
-    template_name = "moods/activity_create_form.html"
+    template_name = "moods/entry_create_form.html"
     success_url = reverse_lazy("home")
 
     def handle_no_permission(self):
@@ -34,9 +34,9 @@ class ActivityCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class ActivityDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    model = Activity
-    template_name = "moods/activity_delete_form.html"
+class EntryDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Entry
+    template_name = "moods/entry_delete_form.html"
     slug_field = "sqid"
     success_url = reverse_lazy("home")
 
@@ -47,11 +47,11 @@ class ActivityDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return HttpResponseRedirect(reverse_lazy("home"))
 
 
-class ActivityUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    model = Activity
-    fields = ["name"]
+class EntryUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Entry
+    fields = ["mood", "activities", "note_title", "note_body", "date", "time"]
     slug_field = "sqid"
-    template_name = "moods/activity_update_form.html"
+    template_name = "moods/entry_update_form.html"
     success_url = reverse_lazy("home")
 
     def test_func(self):
