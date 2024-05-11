@@ -16,6 +16,7 @@ django-sqids = "^0.2.0"
 pymemcache = "^4.0.0"
 redis = {extras = ["hiredis"], version = "^5.0.4"}
 psycopg = {extras = ["binary"], version = "^3.1.18"}
+faker = "^25.1.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -26,7 +27,6 @@ ruff = "^0.4.3"
 django-browser-reload = "^1.12.1"
 django-silk = "^5.1.0"
 django-debug-toolbar = "^4.3.0"
-faker = "^25.1.0"
 
 [build-system]
 requires = ["poetry-core"]
