@@ -3,18 +3,29 @@
 {% block title %}Moods{% endblock title %}
 
 {% block content %}
-  <h1>Moods</h1>
-  <a href="{% url 'mood_create' %}">Add</a>
+  <main class="main">
+    <ul class="moods">
+      {% for mood in moods %}
+        <li class="mood">
+          <div class="mood__icon">
+            {{ mood.icon}}
+          </div>
+          <p class="mood__name">
+            {{mood.name}}
+          </p>
+        </li>
+      {% empty %}
+        <p>You don't have any moods added yet!</p>
+      {% endfor %}
+    </ul>
 
-  <ul>
-    {% for mood in moods %}
-      <li>
-        <span>{{ mood.icon}} {{mood.name}}</span>
-        <a href="{% url 'mood_update' mood.sqid %}">Edit</a>
-        <a href="{% url 'mood_delete' mood.sqid %}">Delete</a>
-      </li>
-    {% empty %}
-      <p>You don't have any moods added yet!</p>
-    {% endfor %}
-  </ul>
+    <div class="actions">
+      <button
+        hx-get="{% url 'mood_create' %}"
+        hx-target="body"
+        class="btn btn--action">
+        Add new mood
+      </button>
+    </div>
+  </main>
 {% endblock content %}

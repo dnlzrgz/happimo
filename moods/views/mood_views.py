@@ -24,7 +24,7 @@ class MoodCreateView(LoginRequiredMixin, CreateView):
     fields = ["icon", "name"]
     slug_field = "sqid"
     template_name = "moods/mood_create_form.html"
-    success_url = reverse_lazy("home")
+    success_url = reverse_lazy("mood_list")
 
     def handle_no_permission(self):
         return HttpResponseRedirect(reverse_lazy("home"))
@@ -38,7 +38,7 @@ class MoodDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Mood
     template_name = "moods/mood_delete_form.html"
     slug_field = "sqid"
-    success_url = reverse_lazy("home")
+    success_url = reverse_lazy("mood_list")
 
     def test_func(self):
         return self.get_object().user == self.request.user
@@ -52,7 +52,7 @@ class MoodUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     fields = ["icon", "name"]
     slug_field = "sqid"
     template_name = "moods/mood_update_form.html"
-    success_url = reverse_lazy("home")
+    success_url = reverse_lazy("mood_list")
 
     def test_func(self):
         return self.get_object().user == self.request.user

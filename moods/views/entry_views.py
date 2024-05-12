@@ -32,7 +32,7 @@ class EntryCreateView(LoginRequiredMixin, CreateView):
     fields = ["mood", "activities", "note_title", "note_body", "date", "time"]
     slug_field = "sqid"
     template_name = "moods/entry_create_form.html"
-    success_url = reverse_lazy("home")
+    success_url = reverse_lazy("entry_list")
 
     def handle_no_permission(self):
         return HttpResponseRedirect(reverse_lazy("home"))
@@ -46,7 +46,7 @@ class EntryDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Entry
     template_name = "moods/entry_delete_form.html"
     slug_field = "sqid"
-    success_url = reverse_lazy("home")
+    success_url = reverse_lazy("entry_list")
 
     def test_func(self):
         return self.get_object().user == self.request.user
@@ -60,7 +60,7 @@ class EntryUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     fields = ["mood", "activities", "note_title", "note_body", "date", "time"]
     slug_field = "sqid"
     template_name = "moods/entry_update_form.html"
-    success_url = reverse_lazy("home")
+    success_url = reverse_lazy("entry_list")
 
     def test_func(self):
         return self.get_object().user == self.request.user

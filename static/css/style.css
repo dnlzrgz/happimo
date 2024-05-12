@@ -159,6 +159,7 @@
 html {
   font-size: var(--text-base);
   font-family: "Archivo", var(--fallback-sans);
+  color: var(--foreground);
   scroll-behavior: smooth;
 }
 
@@ -270,21 +271,51 @@ h6 {
   width: var(--w-50);
 }
 
-.entry {
-  cursor: pointer;
-  user-select: none;
+.activities {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: calc(var(--space-base) * 8);
+  list-style: none;
+  margin: 0 auto;
+  width: var(--w-50);
+}
+
+.moods {
   display: grid;
-  grid-template-columns: auto 1fr;
-  column-gap: calc(var(--space-base) * 8);
+  gap: calc(var(--space-base) * 16);
+  grid-auto-flow: column;
+  list-style: none;
+  margin: 0 auto;
+  width: var(--w-50);
+}
+
+.entry,
+.activity,
+.mood {
   background: var(--white);
-  border-radius: var(--rounded-xl);
   border: var(--border-2) solid var(--black);
   box-shadow: var(--shadow);
+  cursor: pointer;
+  font-family: "ClashDisplay", var(--fallback-serif);
+  font-size: var(--text-xl);
+  font-weight: var(--font-medium);
   padding: calc(var(--space-base) * 4) calc(var(--space-base) * 8);
+  text-align: center;
   transition:
     background var(--transition-duration) var(--transition-timing),
     box-shadow var(--transition-duration) var(--transition-timing),
     transform var(--transition-duration) var(--transition-timing);
+  user-select: none;
+}
+
+.entry {
+  text-align: left;
+  border-radius: var(--rounded-xl);
+  column-gap: calc(var(--space-base) * 8);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  padding: calc(var(--space-base) * 4) calc(var(--space-base) * 8);
 }
 
 .entry__mood {
@@ -306,36 +337,21 @@ h6 {
 }
 
 .entry__note {
+  font-weight: var(--font-normal);
+  font-family: "Archivo", var(--fallback-sans);
   font-size: var(--text-xl);
 }
 
-.activities {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: calc(var(--space-base) * 8);
-  list-style: none;
-  margin: 0 auto;
-  width: var(--w-50);
+.mood {
+  padding: calc(var(--space-base) * 16) calc(var(--space-base) * 8);
 }
 
-.activity {
-  font-family: "ClashDisplay", var(--fallback-serif);
-  font-size: var(--text-xl);
-  background: var(--white);
-  color: var(--foreground);
-  border: var(--border-2) solid var(--black);
-  font-weight: var(--font-medium);
-  padding: calc(var(--space-base) * 4) calc(var(--space-base) * 8);
-  color: var(--background);
-  box-shadow: var(--shadow);
-  cursor: pointer;
-  transition:
-    background var(--transition-duration) var(--transition-timing),
-    box-shadow var(--transition-duration) var(--transition-timing),
-    transform var(--transition-duration) var(--transition-timing);
+.mood__icon {
+  font-size: var(--text-5xl);
+  justify-self: center;
 }
 
+.mood:hover,
 .entry:hover,
 .activity:hover {
   background: var(--background);
