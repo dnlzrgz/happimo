@@ -1,0 +1,24 @@
+{% for entry in entries %}
+  <li class="entry" hx-get="{% url 'entry_update' entry.sqid %}" hx-target="body">
+    <div class="entry__mood">{{ entry.mood.icon }}</div>
+
+    <div class="entry__content">
+      <time class="entry__date"> {{ entry.date }}, {{ entry.time }} </time>
+      <p class="entry__note">{{ entry.note_title }}</p>
+    </div>
+  </li>
+{% empty %}
+  <p>You don't have any entries added yet!</p>
+{% endfor %}
+
+{% if page_obj.has_next %}
+  <span
+    hx-get="/app/?page={{page_obj.next_page_number}}"
+    hx-headers='{"X-Next-Page": "True"}'
+    hx-push-url="false"
+    hx-trigger="intersect throttle:3s once"
+    hx-swap="beforeend"
+    hx-target=".entries"
+  >
+  </span>
+{% endif %}

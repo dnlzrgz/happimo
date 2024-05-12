@@ -218,26 +218,27 @@ h6 {
 }
 
 .nav {
+  align-items: center;
+  background: var(--white);
   border-radius: var(--rounded-xl);
   border: var(--border-2) solid var(--black);
-  display: grid;
-  align-items: center;
   box-shadow: var(--shadow);
+  display: grid;
   grid-template-columns: auto 1fr auto;
   padding: calc(var(--space-base) * 8) calc(var(--space-base) * 16);
   position: fixed;
   width: var(--w-75);
-  background: var(--white);
+  z-index: 999;
 }
 
 .nav--main {
 }
 
 .nav__link {
-  text-decoration: none;
-  font-size: var(--text-xl);
   color: var(--black);
+  font-size: var(--text-xl);
   line-height: 0;
+  text-decoration: none;
 }
 
 .nav > .nav__link:first-of-type {

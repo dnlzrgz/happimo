@@ -16,6 +16,12 @@ class EntryListView(LoginRequiredMixin, ListView):
     template_name = "moods/entry_list.html"
     paginate_by = 45
 
+    def get(self, request, *args, **kwargs):
+        if request.headers.get("X-Next-Page"):
+            self.template_name = "moods/hx_entry_list.html"
+
+        return super().get(request, *args, **kwargs)
+
     def get_queryset(self):
         return (
             Entry.objects.filter(user=self.request.user)
