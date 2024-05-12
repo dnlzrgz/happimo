@@ -3,18 +3,26 @@
 {% block title %}Activities{% endblock title %}
 
 {% block content %}
-  <h1>Activities</h1>
-  <a href="{% url 'activity_create' %}">Add</a>
+  <main class="main">
+    <ul class="activities">
+      {% for activity in activities %}
+        <li class="activity">
+          <a href="{% url 'activity_update' activity.sqid %}" class="link link--internal">
+            {{activity.name}}
+          </a>
+        </li>
+      {% empty %}
+        <p>You don't have any activities added yet!</p>
+      {% endfor %}
+    </ul>
 
-  <ul>
-    {% for activity in activities %}
-      <li>
-        <span>{{activity.name}}</span>
-        <a href="{% url 'activity_update' activity.sqid %}">Edit</a>
-        <a href="{% url 'activity_delete' activity.sqid %}">Delete</a>
-      </li>
-    {% empty %}
-      <p>You don't have any activities added yet!</p>
-    {% endfor %}
-  </ul>
+    <div class="actions">
+      <button
+        hx-get="{% url 'activity_create' %}"
+        hx-target="body"
+        class="btn btn--action">
+        Add new activity
+      </button>
+    </div>
+  </main>
 {% endblock content %}

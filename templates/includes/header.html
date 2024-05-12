@@ -1,0 +1,40 @@
+<header class="header">
+  <nav class="nav nav--main">
+    <a href="{% url 'home' %}" class="nav__link link link--internal">
+      Happimo
+    </a>
+
+    <ul class="nav__list">
+      <li class="nav__list__item">
+        <a href="{% url 'entry_list' %}" class="nav__link link link--internal">
+          Entries
+        </a>
+      </li>
+
+      <li class="nav__list__item">
+        <a href="{% url 'mood_list' %}" class="nav__link link link--internal">
+          Moods
+        </a>
+      </li>
+
+      <li class="nav__list__item">
+        <a
+          href="{% url 'activity_list' %}"
+          class="nav__link link link--internal"
+        >
+          Activities
+        </a>
+      </li>
+    </ul>
+
+    <div class="nav__actions">
+      <button
+        hx-get="{% url 'entry_create' %}"
+        hx-target="body"
+        class="nav__actions__action btn btn--action"
+      >
+        New entry
+      </button>
+    </div>
+  </nav>
+</header>

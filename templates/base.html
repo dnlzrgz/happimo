@@ -17,7 +17,6 @@
     {% endblock extra_css %}
 
     <!-- JavaScript -->
-    <!-- htmx -->
     {% if debug %}
       <script src="{% static 'js/htmx.js' %}" defer></script>
       <script src="{% static 'js/debug.js' %}" defer></script>
@@ -42,7 +41,9 @@
     {% endblock extra_js %}
   </head>
 
-  <body hx-boost="true" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+  <body class="body" hx-boost="true" hx-push-url="true" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+    {% include 'includes/header.html' %}
+
     {% block content %}
     {% endblock content %}
   </body>
