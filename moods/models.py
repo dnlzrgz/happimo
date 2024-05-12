@@ -69,7 +69,7 @@ class Entry(models.Model):
     last_modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"Mood added at {self.date}:{self.time}"
+        return f"Entry added at {self.date}:{self.time}"
 
     class Meta:
         verbose_name_plural = "entries"
