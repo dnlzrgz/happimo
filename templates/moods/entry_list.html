@@ -2,6 +2,16 @@
 
 {% block title %}Entries{% endblock title %}
 
+{% block extra_js %}
+  <script>
+    window.addEventListener('htmx:afterRequest', function (event) {
+      if (event.srcElement.className == 'next-page-loader') {
+        event.srcElement.classList.add('hide');
+      }
+    });
+  </script>
+{% endblock extra_js %}
+
 {% block content %}
   <main class="main">
     <ul class="entries">

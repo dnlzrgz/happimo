@@ -405,3 +405,8 @@ h6 {
 
 .btn--action {
 }
+
+.hide {
+  display: none;
+  visibility: hidden;
+}

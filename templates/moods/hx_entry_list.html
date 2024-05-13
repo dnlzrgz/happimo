@@ -13,6 +13,7 @@
 
 {% if page_obj.has_next %}
   <span
+    class="next-page-loader"
     hx-get="/app/?page={{page_obj.next_page_number}}"
     hx-headers='{"X-Next-Page": "True"}'
     hx-push-url="false"
@@ -21,4 +22,7 @@
     hx-target=".entries"
   >
   </span>
+{% else %}
+<!-- TODO: Check if there were any pages before displaying. -->
+  <p>There is nothing more to see!</p>
 {% endif %}
