@@ -5,6 +5,14 @@
     <div class="entry__content">
       <time class="entry__date"> {{ entry.date }}, {{ entry.time }} </time>
       <p class="entry__note">{{ entry.note_title }}</p>
+
+      {% if entry.activities.all %}
+        <ul class="entry__activities">
+          {% for activity in entry.activities.all %}
+            <li class="entry__activity">{{ activity.name }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
     </div>
   </li>
 {% empty %}

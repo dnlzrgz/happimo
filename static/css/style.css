@@ -32,7 +32,7 @@
   --text-9xl: 8rem;
 
   /* Font weight */
-  --font-thing: 100;
+  --font-thin: 100;
   --font-light: 300;
   --font-normal: 400;
   --font-medium: 500;
@@ -134,14 +134,6 @@
   font-style: normal;
 }
 
-@font-face {
-  font-family: "Archivo";
-  src: url("/static/fonts/Archivo-Italic-VariableFont_wdth,wght.ttf")
-    format("truetype");
-  font-weight: 100 900;
-  font-style: italic;
-}
-
 /**
 * CSS Reset
 * To learn more: https://www.joshwcomeau.com/css/custom-css-reset/
@@ -206,6 +198,8 @@ h6 {
 /**
  * Styles
  **/
+
+/* Main elemenets */
 .body {
   background: var(--background);
 }
@@ -263,6 +257,7 @@ h6 {
   margin: calc(var(--space-base) * 64) 0;
 }
 
+/* App styles */
 .entries {
   display: flex;
   flex-direction: column;
@@ -311,18 +306,18 @@ h6 {
 }
 
 .entry {
-  text-align: left;
   border-radius: var(--rounded-xl);
   column-gap: calc(var(--space-base) * 8);
   display: grid;
   grid-template-columns: auto 1fr;
   padding: calc(var(--space-base) * 4) calc(var(--space-base) * 8);
+  text-align: left;
 }
 
 .entry__mood {
   display: grid;
-  place-content: center;
   font-size: var(--text-6xl);
+  place-content: center;
 }
 
 .entry__content {
@@ -338,9 +333,27 @@ h6 {
 }
 
 .entry__note {
-  font-weight: var(--font-normal);
   font-family: "Archivo", var(--fallback-sans);
   font-size: var(--text-xl);
+  font-weight: var(--font-normal);
+}
+
+.entry__activities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--space-base) * 4);
+  list-style: none;
+  padding: 0;
+}
+
+.entry__activity {
+  background: var(--white);
+  border-radius: var(--rounded-full);
+  border: var(--border-2) solid var(--foreground);
+  font-family: "ClashDisplay", var(--fallback-serif);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  padding: calc(var(--space-base) * 2) calc(var(--space-base) * 4);
 }
 
 .mood {
@@ -360,11 +373,22 @@ h6 {
   transform: translate(var(--shadow-offset), var(--shadow-offset));
 }
 
+/* Form styles */
+.form {
+  background: var(--white);
+  border-radius: var(--rounded-xl);
+  border: var(--border-2) solid var(--black);
+  box-shadow: var(--shadow);
+  margin: 0 auto;
+  width: var(--w-50);
+}
+
+/* Util styles */
 .actions {
   display: flex;
   justify-content: center;
-  padding-top: calc(var(--space-base) * 24);
   margin: 0 auto;
+  padding-top: calc(var(--space-base) * 24);
   width: var(--w-50);
 }
 
@@ -381,6 +405,7 @@ h6 {
 }
 
 .btn {
+  border: var(--border-2) solid var(--foreground);
   font-family: "ClashDisplay", var(--fallback-serif);
   font-size: var(--text-xl);
   background: var(--brand);
