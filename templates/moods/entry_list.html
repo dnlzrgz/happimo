@@ -1,20 +1,24 @@
 {% extends "base.html" %}
 
-{% block title %}Entries{% endblock title %}
+{% block title %}Happimo - Entries{% endblock title %}
 
 {% block extra_js %}
   <script>
     window.addEventListener('htmx:afterRequest', function (event) {
       if (event.srcElement.className == 'next-page-loader') {
-        event.srcElement.classList.add('hide');
+        event.srcElement.remove();
       }
     });
   </script>
 {% endblock extra_js %}
 
+{% block body_class %}body--entries{% endblock %}
+
 {% block content %}
-  <main class="main">
-    <ul class="entries">
+  {% include 'includes/app_header.html' %}
+
+  <main class="main main--entries">
+    <ul class="entries list">
       {% include 'moods/hx_entry_list.html' %}
     </ul>
   </main>

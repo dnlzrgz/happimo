@@ -1,22 +1,22 @@
 {% for entry in entries %}
-  <li class="entry" hx-get="{% url 'entry_update' entry.sqid %}" hx-target="body">
+  <li
+    class="entry action action--card"
+    hx-get="{% url 'entry_update' entry.sqid %}"
+    hx-target="body"
+  >
     <div class="entry__mood">{{ entry.mood.icon }}</div>
 
-    <div class="entry__content">
-      <time class="entry__date"> {{ entry.date }}, {{ entry.time }} </time>
-      <p class="entry__note">{{ entry.note_title }}</p>
+    <time class="entry__date"> {{ entry.date }}, {{ entry.time }} </time>
+    <p class="entry__note">{{ entry.note_title }}</p>
 
-      {% if entry.activities.all %}
-        <ul class="entry__activities">
-          {% for activity in entry.activities.all %}
-            <li class="entry__activity">{{ activity.name }}</li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-    </div>
+    {% if entry.activities.all %}
+      <ul class="entry__activities list">
+        {% for activity in entry.activities.all %}
+          <li class="entry__activity">{{ activity.name }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
   </li>
-{% empty %}
-  <p>You don't have any entries added yet!</p>
 {% endfor %}
 
 {% if page_obj.has_next %}
@@ -31,6 +31,5 @@
   >
   </span>
 {% else %}
-<!-- TODO: Check if there were any pages before displaying. -->
-  <p>There is nothing more to see!</p>
+<!-- TODO: Check if there were any pages to start with. -->
 {% endif %}

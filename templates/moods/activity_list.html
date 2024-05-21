@@ -1,26 +1,31 @@
 {% extends "base.html" %}
 
-{% block title %}Activities{% endblock title %}
+{% block title %}Happimo - Activities{% endblock title %}
+
+{% block body_class %}body--activities{% endblock %}
 
 {% block content %}
-  <main class="main">
-    <ul class="activities">
+  {% include 'includes/app_header.html' %}
+
+  <main class="main main--activities">
+    <ul class="activities list">
       {% for activity in activities %}
-        <li class="activity">
-          <a href="{% url 'activity_update' activity.sqid %}" class="link link--internal">
-            {{activity.name}}
-          </a>
+        <li class="activity action action--pill"
+            hx-get="{% url 'activity_update' activity.sqid %}"
+            hx-target="body"
+        >
+          {{activity.name}}
         </li>
       {% empty %}
         <p>You don't have any activities added yet!</p>
       {% endfor %}
     </ul>
 
-    <div class="actions">
+    <div class="actions-container">
       <button
         hx-get="{% url 'activity_create' %}"
         hx-target="body"
-        class="btn btn--action">
+        class="action action--add">
         Add new activity
       </button>
     </div>
