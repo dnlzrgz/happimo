@@ -5,11 +5,16 @@ clean:
 	find . -type d -name "__pycache__" -delete
 	@echo "✨ Clean up complete!"
 
-# Lint using Ruff
-lint:
-	@echo "🔍 Linting..."
+# Run format with Ruff and djhtml
+format:
+	@echo "🔍 Formatting..."
 	ruff check . --fix
 	djhtml .
+	@echo "✨ Format complete!"
+
+# Run pre-commit
+lint:
+	@echo "🔍 Linting..."
 	pre-commit run --all-files
 	@echo "✨ Linting complete!"
 
@@ -28,13 +33,19 @@ update:
 	pre-commit autoupdate
 	@echo "✨ Update complete!"
 
-# Download v1.9.12 htmx script
+# Download v1.9.12 of htmx
 download-htmx:
 	@echo "📥 Downloading htmx script..."
 	curl -sL https://unpkg.com/htmx.org@1.9.12/dist/htmx.js -o static/js/htmx.js
 	curl -sL https://unpkg.com/htmx.org@1.9.12/dist/htmx.min.js -o static/js/htmx.min.js
 	curl -sL https://unpkg.com/htmx.org/dist/ext/debug.js -o static/js/debug.js
 	@echo "✨ htmx script downloaded and saved!"
+
+# Download emoji-mart emoji picker
+download-emoji-mart:
+	@echo "📥 Downloading emoji-mart script..."
+	curl -sL https://cdn.jsdelivr.net/npm/emoji-mart@latest/dist/browser.js -o static/js/emoji-mart.js
+	@echo "✨ emoji-mart script downloaded and saved!"
 
 # Run tests
 test:
@@ -74,6 +85,7 @@ dev-restart:
 # Setup project
 setup:
 	@make download-htmx
+	@make download-emoji-mart
 	poetry install
 	pre-commit install
 	pre-commit run --all-files
