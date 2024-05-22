@@ -1,11 +1,7 @@
-{% extends "base.html" %}
+{% extends "base_form.html" %}
 
-{% block title %}Update{% endblock title %}
-
-{% block content %}
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Update" />
-  </form>
-{% endblock content %}
+{% block form_title %}Happimo - Update activity{% endblock form_title %}
+{% block form_classes %}form--activity form--activity-update{% endblock form_classes %}
+{% block form_header %}Update activity{% endblock form_header %}
+{% block form_body %}{{ form.as_p }}{% endblock form_body %}
+{% block submit_text %}Update{% endblock submit_text %}

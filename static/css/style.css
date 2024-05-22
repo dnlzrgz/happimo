@@ -92,6 +92,7 @@
   /* Shadows */
   --shadow-offset-xs: var(--space-xs);
   --shadow-offset-sm: var(--space-sm);
+  --shadow-offset-md: var(--space-md);
 
   /* Width, height */
   --w-25: 25%;
@@ -214,7 +215,14 @@ h6 {
  * Styles
  **/
 
+.next-page-loader {
+  width: var(--w-100);
+  display: block;
+  background: red;
+}
+
 /* Utils */
+
 .list {
   list-style: none;
   padding: 0;
@@ -269,6 +277,13 @@ h6 {
   background: var(--background);
 }
 
+.action--submit {
+  background: var(--brand);
+  color: var(--background);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+}
+
 .action:hover {
   background: var(--background);
   color: var(--foreground);
@@ -276,6 +291,7 @@ h6 {
   transform: translate(var(--shadow-offset-xs), var(--shadow-offset-xs));
 }
 
+.action--submit:hover,
 .action--add:hover,
 .action--nav:hover {
   background: var(--brand-lighter);
@@ -338,6 +354,7 @@ h6 {
 /* App styles */
 .main {
   margin-top: var(--space-2xl);
+  margin-bottom: var(--space-lg);
 }
 
 .activities,
@@ -355,14 +372,14 @@ h6 {
 }
 
 .entry {
-  font-family: 'Satoshi', var(--fallback-sans);
+  font-family: "Satoshi", var(--fallback-sans);
   background: var(--background);
   border-radius: var(--rounded-lg);
   column-gap: var(--space-md);
   cursor: pointer;
   display: grid;
   font-size: var(--text-lg);
-  grid-template-areas: 'mood date' 'mood note';
+  grid-template-areas: "mood date" "mood note";
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr;
   user-select: none;
@@ -370,7 +387,7 @@ h6 {
 }
 
 .entry:has(.entry__activities) {
-  grid-template-areas: 'mood date' 'mood note' 'mood activities';
+  grid-template-areas: "mood date" "mood note" "mood activities";
   grid-template-rows: repeat(3, auto);
 }
 
@@ -450,4 +467,73 @@ h6 {
   display: inline-flex;
   font-size: var(--text-lg);
   font-weight: var(--font-semibold);
+}
+
+/* Forms */
+.main--form {
+  display: grid;
+  place-items: center;
+  padding-bottom: var(--space-xl);
+}
+
+.window {
+  border: var(--border-2) solid var(--foreground);
+  background: var(--background);
+  cursor: pointer;
+  filter: drop-shadow(
+    var(--shadow-offset-md) var(--shadow-offset-md) var(--brand-lighter)
+  );
+  border-top-right-radius: var(--rounded-md);
+  border-top-left-radius: var(--rounded-md);
+}
+
+.window__bar {
+  display: flex;
+  align-items: center;
+  background: var(--brand-lighter);
+  border-bottom: var(--border-2) solid var(--foreground);
+  border-top-left-radius: var(--rounded-md);
+  border-top-right-radius: var(--rounded-md);
+  padding: var(--space-sm);
+}
+
+.window__bar__dot {
+  border-radius: var(--rounded-full);
+  border: var(--border-2) solid var(--foreground);
+  display: inline-block;
+  padding: var(--space-sm);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-md) var(--space-lg);
+}
+
+.form__title {
+  font-size: var(--text-2xl);
+  margin-bottom: var(--space-md);
+}
+
+.form > p {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--space-md);
+}
+
+.form label {
+  font-family: "Cabinet Grotesk", var(--fallback-serif);
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
+}
+
+.form input {
+  border-radius: var(--rounded-md);
+  border: var(--border-2) solid var(--foreground);
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--text-lg);
+}
+
+.submit {
+  margin-top: var(--space-lg);
 }

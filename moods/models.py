@@ -42,7 +42,7 @@ class Activity(models.Model):
 
     class Meta:
         verbose_name_plural = "activities"
-        ordering = ["-name"]
+        ordering = ["name"]
 
 
 class Entry(models.Model):

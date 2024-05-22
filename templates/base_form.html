@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {% block form_title %}{% endblock form_title %}
+{% endblock title %}
+
+{% block content %}
+  {% include 'includes/app_header.html' %}
+
+  <main class="main main--form {% block main_classes %}{% endblock main_classes %}">
+    <div class="window">
+      <div class="window__bar">
+        <div class="window__bar__controls">
+          <span class="window__bar__dot"></span>
+          <span class="window__bar__dot"></span>
+          <span class="window__bar__dot"></span>
+        </div>
+        <span class="window__bar__close"></span>
+      </div>
+      <form
+        method="post"
+        class="form {% block form_classes %}{% endblock form_classes %}"
+        action="{% block form_action %}{% endblock form_action %}"
+      >
+        <h2 class="form__title">
+          {% block form_header %}
+          {% endblock form_header %}
+        </h2>
+
+        {% block form_body %}
+          {{ form.as_p }}
+        {% endblock form_body %}
+
+        <button
+          type="submit"
+          class="action action--submit submit {% block form_submit_class %}{% endblock form_submit_class %}"
+        >
+          {% block submit_text %}Add{% endblock submit_text %}
+        </button>
+      </form>
+    </div>
+  </main>
+{% endblock content %}
