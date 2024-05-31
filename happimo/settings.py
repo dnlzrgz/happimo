@@ -27,7 +27,7 @@ DEBUG = env.bool(
 
 ALLOWED_HOSTS = env.list(
     "ALLOWED_HOSTS",
-    [],
+    ["*"],
 )
 
 ADMIN_URL = env.str(

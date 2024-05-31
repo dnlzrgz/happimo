@@ -4,7 +4,10 @@
     hx-get="{% url 'entry_update' entry.sqid %}"
     hx-target="body"
   >
-    <div class="entry__mood">{{ entry.mood.icon }}</div>
+    <div
+      class="entry__mood"
+      style="background-color: {{ entry.mood.color }};"
+    ></div>
 
     <time class="entry__date"> {{ entry.date }}, {{ entry.time }} </time>
     <p class="entry__note">{{ entry.note_title }}</p>

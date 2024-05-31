@@ -28,13 +28,9 @@
     </ul>
 
     <div class="nav__actions">
-      <button
-        hx-get="{% url 'entry_create' %}"
-        hx-target="body"
-        class="action action--nav"
-      >
+      <a href="{% url 'entry_create' %}" class="action action--nav">
         New entry
-      </button>
+      </a>
     </div>
   </nav>
 </header>

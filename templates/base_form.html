@@ -4,6 +4,14 @@
   {% block form_title %}{% endblock form_title %}
 {% endblock title %}
 
+{% block extra_css %}
+  {% block form_extra_css %}{% endblock form_extra_css %}
+{% endblock extra_css %}
+
+{% block extra_js %}
+  {% block form_extra_js %}{% endblock form_extra_js %}
+{% endblock extra_js %}
+
 {% block content %}
   {% include 'includes/app_header.html' %}
 
@@ -27,6 +35,7 @@
           {% endblock form_header %}
         </h2>
 
+        {% csrf_token %}
         {% block form_body %}
           {{ form.as_p }}
         {% endblock form_body %}

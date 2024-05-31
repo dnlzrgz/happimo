@@ -2,7 +2,7 @@ import random
 from django.contrib.auth import get_user_model
 from faker import Faker
 from moods.models import Activity, Entry, Mood
-from utils.dummy import FEELINGS_LIST, EMOJIS_LIST, ACTIVITY_LIST
+from utils.dummy import FEELINGS_LIST, ACTIVITY_LIST
 
 fake = Faker()
 
@@ -40,7 +40,7 @@ def create_fake_mood(user):
     mood = Mood.objects.create(
         user=user,
         name=random.choice(FEELINGS_LIST),
-        icon=random.choice(EMOJIS_LIST),
+        color=fake.color(),
     )
 
     return mood

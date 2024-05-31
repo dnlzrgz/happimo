@@ -255,6 +255,7 @@ h6 {
   );
   font-family: "Cabinet Grotesk", var(--fallback-serif);
   padding: var(--space-xs) var(--space-md);
+  text-decoration: none;
   transition:
     background var(--transition-duration) var(--transition-timing),
     filter var(--transition-duration) var(--transition-timing),
@@ -392,11 +393,12 @@ h6 {
 }
 
 .entry__mood {
-  display: grid;
-  font-size: var(--text-6xl);
+  border-radius: var(--rounded-full);
+  border: var(--border-2) solid var(--foreground);
   grid-area: mood;
-  place-items: center;
-  place-self: start;
+  height: var(--space-xl);
+  place-self: center;
+  width: var(--space-xl);
 }
 
 .entry__date {
@@ -444,8 +446,12 @@ h6 {
   place-items: center;
 }
 
-.mood__icon {
-  font-size: var(--text-6xl);
+.mood__color {
+  border-radius: var(--rounded-full);
+  border: var(--border-2) solid var(--foreground);
+  height: var(--space-xl);
+  margin: var(--space-sm) 0;
+  width: var(--space-xl);
 }
 
 .mood__name {
@@ -536,4 +542,10 @@ h6 {
 
 .submit {
   margin-top: var(--space-lg);
+}
+
+/* Color picker */
+.clr-field > button:nth-child(1) {
+  border-top-right-radius: var(--rounded-md);
+  border-bottom-right-radius: var(--rounded-md);
 }

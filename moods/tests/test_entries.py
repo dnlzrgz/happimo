@@ -23,7 +23,7 @@ class EntryListViewTest(TestCase, TestAuthenticatedViewAccessMixin):
 
         response = self.client.get(self.url)
 
-        self.assertContains(response, mood.icon)
+        self.assertContains(response, mood.color)
         self.assertContains(response, entry.note_title)
 
     def test_user_can_not_see_other_users_entries(self):
@@ -34,7 +34,7 @@ class EntryListViewTest(TestCase, TestAuthenticatedViewAccessMixin):
         self.client.login(**other_credentials)
         response = self.client.get(self.url)
 
-        self.assertNotContains(response, mood.icon)
+        self.assertNotContains(response, mood.color)
         self.assertNotContains(response, mood.name)
         self.assertNotContains(response, entry.note_title)
 

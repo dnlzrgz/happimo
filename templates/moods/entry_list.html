@@ -1,8 +1,30 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block title %}Happimo - Entries{% endblock title %}
 
 {% block extra_js %}
+  {% if debug %}
+    <script src="{% static 'js/htmx.js' %}" defer></script>
+    <script src="{% static 'js/debug.js' %}" defer></script>
+
+    <script>
+      if (typeof window.htmx !== "undefined") {
+        htmx.on("htmx:afterSettle", function(detail) {
+          if (
+            typeof window.djdt !== "undefined"
+            && detail.target instanceof HTMLBodyElement
+          ) {
+            djdt.show_toolbar();
+          }
+        });
+      }
+    </script>
+  {% else %}
+    <script src="{% static 'js/htmx.min.js' %}" defer></script>
+  {% endif %}
+
   <script>
     window.addEventListener('htmx:afterRequest', function (event) {
       if (event.srcElement.className == 'next-page-loader') {

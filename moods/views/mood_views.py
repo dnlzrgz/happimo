@@ -21,7 +21,7 @@ class MoodListView(LoginRequiredMixin, ListView):
 
 class MoodCreateView(LoginRequiredMixin, CreateView):
     model = Mood
-    fields = ["icon", "name"]
+    fields = ["color", "name"]
     slug_field = "sqid"
     template_name = "moods/mood_create_form.html"
     success_url = reverse_lazy("mood_list")
@@ -49,7 +49,7 @@ class MoodDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 class MoodUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Mood
-    fields = ["icon", "name"]
+    fields = ["color", "name"]
     slug_field = "sqid"
     template_name = "moods/mood_update_form.html"
     success_url = reverse_lazy("mood_list")

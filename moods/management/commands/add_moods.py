@@ -1,8 +1,11 @@
 import random
 from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand, CommandError
+from faker import Faker
 from moods.models import Mood
-from utils.dummy import EMOJIS_LIST, FEELINGS_LIST
+from utils.dummy import FEELINGS_LIST
+
+fake = Faker()
 
 
 class Command(BaseCommand):
@@ -32,15 +35,14 @@ class Command(BaseCommand):
                 user = get_user_model().objects.get(username=username)
 
                 feelings = random.sample(FEELINGS_LIST, n)
-                icons = random.sample(EMOJIS_LIST, n)
 
                 moods = [
                     Mood(
                         user=user,
                         name=feeling,
-                        icon=icon,
+                        color=fake.color(),
                     )
-                    for feeling, icon in zip(feelings, icons)
+                    for feeling in feelings
                 ]
 
                 Mood.objects.bulk_create(moods)

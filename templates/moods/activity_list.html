@@ -22,12 +22,11 @@
     </ul>
 
     <div class="actions-container">
-      <button
-        hx-get="{% url 'activity_create' %}"
-        hx-target="body"
+      <a
+        href="{% url 'activity_create' %}"
         class="action action--add">
         Add new activity
-      </button>
+      </a>
     </div>
   </main>
 {% endblock content %}

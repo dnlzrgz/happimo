@@ -21,29 +21,6 @@ FEELINGS_LIST = [
     "Confused",
 ]
 
-EMOJIS_LIST = [
-    "😊",
-    "😢",
-    "😠",
-    "😃",
-    "😨",
-    "😌",
-    "😞",
-    "😆",
-    "😇",
-    "😬",
-    "😔",
-    "😍",
-    "😐",
-    "😎",
-    "😤",
-    "😴",
-    "😱",
-    "😳",
-    "😪",
-    "🤔",
-]
-
 ACTIVITY_LIST = [
     "Meditation",
     "Read a book",

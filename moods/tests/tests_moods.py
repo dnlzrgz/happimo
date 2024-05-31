@@ -3,7 +3,7 @@ from http import HTTPStatus
 from django.test import TestCase
 from django.urls import reverse
 from moods.models import Mood
-from utils.dummy import FEELINGS_LIST, EMOJIS_LIST
+from utils.dummy import FEELINGS_LIST
 from utils.test import create_fake_user, create_fake_mood
 from utils.test_mixins import TestAuthenticatedViewAccessMixin
 
@@ -21,7 +21,7 @@ class MoodListViewTest(TestCase, TestAuthenticatedViewAccessMixin):
         response = self.client.get(self.url)
 
         self.assertContains(response, mood.name)
-        self.assertContains(response, mood.icon)
+        self.assertContains(response, mood.color)
 
     def test_user_can_not_see_other_users_moods(self):
         mood = create_fake_mood(self.user)
@@ -31,7 +31,7 @@ class MoodListViewTest(TestCase, TestAuthenticatedViewAccessMixin):
         response = self.client.get(self.url)
 
         self.assertNotContains(response, mood.name)
-        self.assertNotContains(response, mood.icon)
+        self.assertNotContains(response, mood.color)
 
 
 class MoodCreateViewTest(TestCase, TestAuthenticatedViewAccessMixin):
@@ -44,7 +44,7 @@ class MoodCreateViewTest(TestCase, TestAuthenticatedViewAccessMixin):
         self.client.login(**self.credentials)
         mood_data = {
             "name": random.choice(FEELINGS_LIST),
-            "icon": random.choice(EMOJIS_LIST),
+            "color": "#145465",
         }
 
         response = self.client.post(self.url, data=mood_data)
@@ -68,8 +68,8 @@ class MoodUpdateViewTest(TestCase, TestAuthenticatedViewAccessMixin):
     def test_authenticated_user_can_update_mood(self):
         self.client.login(**self.credentials)
         new_mood_data = {
-            "icon": random.choice(EMOJIS_LIST),
             "name": random.choice(FEELINGS_LIST),
+            "color": "#ff0000",
         }
 
         response = self.client.post(self.url, data=new_mood_data)

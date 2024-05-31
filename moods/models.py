@@ -12,14 +12,14 @@ class Mood(models.Model):
         on_delete=models.CASCADE,
     )
 
-    name = models.CharField(max_length=75)
-    icon = models.CharField(max_length=4)
+    name = models.CharField(max_length=20)
+    color = models.CharField(max_length=7, default="#000")
 
     def get_absolute_url(self):
         return reverse("mood_update", kwargs={"slug": self.sqid})
 
     def __str__(self):
-        return f"{self.icon} {self.name}"
+        return f"{self.name}"
 
     class Meta:
         ordering = ["-name"]

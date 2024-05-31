@@ -1,8 +1,29 @@
 {% extends "base_form.html" %}
 
+{% load static %}
+
 {% block form_title %}Happimo - New mood{% endblock form_title %}
+
+{% block extra_css %}
+  <link href="{% static 'css/coloris.min.css' %}" rel="stylesheet" />
+{% endblock extra_css %}
+
+{% block form_extra_js %}
+  <script src="{% static 'js/coloris.min.js' %}" defer></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      Coloris({
+        alpha: false,
+        el: 'input[name="color"]',
+      });
+    });
+  </script>
+{% endblock form_extra_js %}
+
 {% block form_classes %}form--mood form--mood-create{% endblock form_classes %}
 {% block form_action %}{% url 'mood_create' %}{% endblock form_action %}
 {% block form_header %}Add a new mood{% endblock form_header %}
-{% block form_body %}{{ form.as_p }}{% endblock form_body %}
+{% block form_body %}
+  {{ form.as_p }}
+{% endblock form_body %}
 {% block submit_text %}Add{% endblock submit_text %}

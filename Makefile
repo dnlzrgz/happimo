@@ -41,11 +41,12 @@ download-htmx:
 	curl -sL https://unpkg.com/htmx.org/dist/ext/debug.js -o static/js/debug.js
 	@echo "✨ htmx script downloaded and saved!"
 
-# Download emoji-mart emoji picker
-download-emoji-mart:
-	@echo "📥 Downloading emoji-mart script..."
-	curl -sL https://cdn.jsdelivr.net/npm/emoji-mart@latest/dist/browser.js -o static/js/emoji-mart.js
-	@echo "✨ emoji-mart script downloaded and saved!"
+# Download color picker
+download-color-picker:
+	@echo "📥 Downloading color picker script and styles..."
+	curl -sL https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js -o static/js/coloris.min.js
+	curl -sL https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css -o static/css/coloris.min.css
+	@echo "✨ color picker related scripts and styles downloaded and saved!"
 
 # Run tests
 test:
@@ -85,7 +86,7 @@ dev-restart:
 # Setup project
 setup:
 	@make download-htmx
-	@make download-emoji-mart
+	@make download-color-picker
 	poetry install
 	pre-commit install
 	pre-commit run --all-files

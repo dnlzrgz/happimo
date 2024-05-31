@@ -1,6 +1,6 @@
 {% load static %}
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -10,13 +10,11 @@
       {% endblock title %}
     </title>
 
-    <!-- Styles -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet" />
 
     {% block extra_css %}
     {% endblock extra_css %}
 
-    <!-- JavaScript -->
     {% if debug %}
       <script src="{% static 'js/htmx.js' %}" defer></script>
       <script src="{% static 'js/debug.js' %}" defer></script>
@@ -41,7 +39,7 @@
     {% endblock extra_js %}
   </head>
 
-  <body class="body {% block body_class %}{% endblock %}" hx-boost="true" hx-push-url="true" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+  <body class="body {% block body_class %}{% endblock %}" hx-boost="true" hx-push-url="true">
     {% block content %}
     {% endblock content %}
   </body>

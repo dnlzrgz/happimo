@@ -19,7 +19,7 @@ services:
       - memcached
 
   postgres:
-    image: postgres:16.2-alpine3.19
+    image: postgres:16.3-alpine3.20
     container_name: happimo_dev_postgres
     environment:
       - POSTGRES_USER=$POSTGRES_USER
@@ -30,7 +30,7 @@ services:
       - happimo_dev_postgres_data_backups:/backups
 
   memcached:
-    image: memcached:1.6.27-alpine3.19
+    image: memcached:1.6.27-alpine3.20
     container_name: happimo_dev_memcached
     depends_on:
       - postgres
