@@ -10,11 +10,10 @@
   <main class="main main--activities">
     <ul class="activities list">
       {% for activity in activities %}
-        <li class="activity action action--pill"
-            hx-get="{% url 'activity_update' activity.sqid %}"
-            hx-target="body"
-        >
-          {{activity.name}}
+        <li class="activity action">
+          <a href="{% url 'activity_update' activity.sqid %}">
+            {{activity.name}}
+          </a>
         </li>
       {% empty %}
         <p>You don't have any activities added yet!</p>

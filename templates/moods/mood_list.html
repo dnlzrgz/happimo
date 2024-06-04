@@ -10,16 +10,14 @@
   <main class="main main--moods">
     <ul class="moods list">
       {% for mood in moods %}
-        <!-- TODO: add link -->
-        <li class="mood action actionable--card"
-            hx-get="{% url 'mood_update' mood.sqid %}"
-            hx-target="body"
-        >
-          <div class="mood__color" style="background-color: {{ mood.color }};">
-          </div>
-          <p class="mood__name">
-            {{mood.name}}
-          </p>
+        <li class="mood action">
+          <a href="{% url 'mood_update' mood.sqid %}" hx-boost="false">
+            <div class="mood__color" style="background-color: {{ mood.color }};">
+            </div>
+            <p class="mood__name">
+              {{mood.name}}
+            </p>
+          </a>
         </li>
       {% endfor %}
     </ul>

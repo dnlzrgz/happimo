@@ -1,8 +1,8 @@
 {% for entry in entries %}
-  <li
-    class="entry action action--card"
-    hx-get="{% url 'entry_update' entry.sqid %}"
-    hx-target="body"
+  <a
+    href="{% url 'entry_update' entry.sqid %}"
+    class="entry action link"
+    role="listitem"
   >
     <div
       class="entry__mood"
@@ -19,8 +19,10 @@
         {% endfor %}
       </ul>
     {% endif %}
-  </li>
-{% endfor %} {% if page_obj.has_next %}
+  </a>
+{% endfor %}
+
+{% if page_obj.has_next %}
   <span
     class="next-page-loader"
     hx-get="/app/?page={{page_obj.next_page_number}}"

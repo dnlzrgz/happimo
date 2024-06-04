@@ -4,9 +4,9 @@
 
 {% block form_title %}Happimo - New mood{% endblock form_title %}
 
-{% block extra_css %}
+{% block form_extra_css %}
   <link href="{% static 'css/coloris.min.css' %}" rel="stylesheet" />
-{% endblock extra_css %}
+{% endblock form_extra_css %}
 
 {% block form_extra_js %}
   <script src="{% static 'js/coloris.min.js' %}" defer></script>
@@ -15,6 +15,13 @@
       Coloris({
         alpha: false,
         el: 'input[name="color"]',
+        swatches: [
+          "#06d6a0",
+          "#48233c",
+          '#5b6057',
+          '#7542e6',
+          '#ffa62b',
+        ],
       });
     });
   </script>
