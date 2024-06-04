@@ -17,23 +17,10 @@
 
     {% if debug %}
       <script src="{% static 'js/htmx.js' %}" defer></script>
-      <script src="{% static 'js/debug.js' %}" defer></script>
-
-      <script>
-        if (typeof window.htmx !== "undefined") {
-          htmx.on("htmx:afterSettle", function(detail) {
-            if (
-              typeof window.djdt !== "undefined"
-              && detail.target instanceof HTMLBodyElement
-            ) {
-              djdt.show_toolbar();
-            }
-          });
-        }
-      </script>
     {% else %}
       <script src="{% static 'js/htmx.min.js' %}" defer></script>
     {% endif %}
+
 
     {% block extra_js %}
     {% endblock extra_js %}

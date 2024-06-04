@@ -1,36 +1,25 @@
 <header class="header header--app" id="header">
   <nav class="nav nav--app">
-    <a href="{% url 'home' %}" class="nav__home link link--internal">
-      Happimo
-    </a>
+    <a href="{% url 'home' %}" class="nav__home link"> Happimo </a>
 
     <ul class="nav__list list">
       <li class="nav__list__item">
-        <a href="{% url 'entry_list' %}" class="link link--internal link--nav">
-          Entries
-        </a>
+        <a href="{% url 'entry_list' %}" class="link link--nav"> Entries </a>
       </li>
 
       <li class="nav__list__item">
-        <a href="{% url 'mood_list' %}" class="link link--internal link--nav">
-          Moods
-        </a>
+        <a href="{% url 'mood_list' %}" class="link link--nav"> Moods </a>
       </li>
 
       <li class="nav__list__item">
-        <a
-          href="{% url 'activity_list' %}"
-          class="link link--internal link--nav"
-        >
+        <a href="{% url 'activity_list' %}" class="link link--nav">
           Activities
         </a>
       </li>
     </ul>
 
-    <div class="nav__actions">
-      <a href="{% url 'entry_create' %}" class="action action--nav">
-        New entry
-      </a>
-    </div>
+    <a href="{% url 'entry_create' %}" class="action action--nav">
+      New entry
+    </a>
   </nav>
 </header>
