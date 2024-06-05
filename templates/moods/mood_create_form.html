@@ -4,33 +4,17 @@
 
 {% block form_title %}Happimo - New mood{% endblock form_title %}
 
-{% block form_extra_css %}
-  <link href="{% static 'css/coloris.min.css' %}" rel="stylesheet" />
-{% endblock form_extra_css %}
-
-{% block form_extra_js %}
-  <script src="{% static 'js/coloris.min.js' %}" defer></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      Coloris({
-        alpha: false,
-        el: 'input[name="color"]',
-        swatches: [
-          "#06d6a0",
-          "#48233c",
-          '#5b6057',
-          '#7542e6',
-          '#ffa62b',
-        ],
-      });
-    });
-  </script>
-{% endblock form_extra_js %}
-
 {% block form_classes %}form--mood form--mood-create{% endblock form_classes %}
 {% block form_action %}{% url 'mood_create' %}{% endblock form_action %}
 {% block form_header %}Add a new mood{% endblock form_header %}
 {% block form_body %}
   {{ form.as_p }}
+  <datalist id="appColors">
+    <option>#06d6a0</option>
+    <option>#48233c</option>
+    <option>#5b6057</option>
+    <option>#7542e6</option>
+    <option>#ffa62b</option>
+  </datalist>
 {% endblock form_body %}
 {% block submit_text %}Add{% endblock submit_text %}

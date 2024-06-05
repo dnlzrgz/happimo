@@ -40,13 +40,6 @@ download-htmx:
 	curl -sL https://unpkg.com/htmx.org@1.9.12/dist/htmx.min.js -o static/js/htmx.min.js
 	@echo "✨ htmx scripts downloaded and saved!"
 
-# Download color picker
-download-color-picker:
-	@echo "📥 Downloading color picker script and styles..."
-	curl -sL https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js -o static/js/coloris.min.js
-	curl -sL https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css -o static/css/coloris.min.css
-	@echo "✨ color picker related scripts and styles downloaded and saved!"
-
 # Run tests
 test:
 	@echo "🧪 Running all tests..."
@@ -85,7 +78,6 @@ dev-restart:
 # Setup project
 setup:
 	@make download-htmx
-	@make download-color-picker
 	poetry install
 	pre-commit install
 	pre-commit run --all-files

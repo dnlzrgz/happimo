@@ -507,17 +507,29 @@ h6 {
   margin-bottom: var(--space-md);
 }
 
-.form label {
+label {
   font-family: "Cabinet Grotesk", var(--fallback-serif);
   font-size: var(--text-xl);
   font-weight: var(--font-semibold);
 }
 
-.form input {
+input {
   border-radius: var(--rounded-md);
   border: var(--border-2) solid var(--foreground);
   padding: var(--space-sm) var(--space-md);
   font-size: var(--text-lg);
+}
+
+input[type="color"] {
+  border-radius: var(--rounded-full);
+  cursor: pointer;
+  height: var(--space-xl);
+  padding: 0;
+  width: var(--space-xl);
+}
+
+input[type="color"]:hover {
+  border-color: var(--brand);
 }
 
 .submit {

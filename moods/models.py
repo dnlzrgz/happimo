@@ -3,6 +3,7 @@ from django.db.models.functions.datetime import timezone
 from django.conf import settings
 from django.urls import reverse
 from django_sqids import SqidsField
+from moods.form_fields import ColorField
 
 
 class Mood(models.Model):
@@ -13,7 +14,7 @@ class Mood(models.Model):
     )
 
     name = models.CharField(max_length=20)
-    color = models.CharField(max_length=7, default="#000")
+    color = ColorField(default="#7542e6")
 
     def get_absolute_url(self):
         return reverse("mood_update", kwargs={"slug": self.sqid})

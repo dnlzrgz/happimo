@@ -11,7 +11,7 @@
     <ul class="moods list">
       {% for mood in moods %}
         <li class="mood action">
-          <a href="{% url 'mood_update' mood.sqid %}" hx-boost="false">
+          <a href="{% url 'mood_update' mood.sqid %}">
             <div class="mood__color" style="background-color: {{ mood.color }};">
             </div>
             <p class="mood__name">
@@ -25,7 +25,6 @@
     <div class="actions-container">
       <a
         href="{% url 'mood_create' %}"
-        hx-boost="false"
         class="action action--add">
         Add new mood
       </a>
