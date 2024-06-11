@@ -28,10 +28,11 @@
     hx-get="/app/?page={{page_obj.next_page_number}}"
     hx-headers='{"X-Next-Page": "True"}'
     hx-push-url="false"
-    hx-trigger="intersect throttle:3s once"
     hx-swap="beforeend"
     hx-target=".entries"
+    hx-trigger="intersect throttle:3s once"
   >
+    Loading...
   </span>
 {% else %}
 <!-- TODO: Check if there were any pages to start with. -->

@@ -3,5 +3,53 @@
 {% block form_title %}Happimo - Update entry{% endblock form_title %}
 {% block form_classes %}form--entry form--entry-update{% endblock form_classes %}
 {% block form_header %}Update entry{% endblock form_header %}
-{% block form_body %}{{ form.as_p }}{% endblock form_body %}
+{% block form_body %}
+  {% for field in form %}
+    {% if field.name == "activities" %}
+      <fieldset class="form__fieldset">
+        <div class="form__fieldset__header">
+          {{ field.label_tag }}
+
+          <a href="{% url 'activity_create' %}" class="form__activities__create">
+            Add activity
+          </a>
+        </div>
+
+        <div class="form__activities">
+          {% for choice_id, choice_label in form.activities.field.choices %}
+            <label for="id_activities_{{choice_id}}" class="form__activities__activity action">
+              <input type="checkbox" name="activities" id="id_activities_{{choice_id}}" value="{{ choice_id }}" {% if choice_id in form.activities.value %}checked{% endif %} />
+              {{ choice_label }}
+            </label>
+          {% endfor %}
+        </div>
+      </fieldset>
+    {% elif field.name == 'mood' %}
+      <fieldset class="form__fieldset">
+        <div class="form__fieldset__header">
+          {{ field.label_tag }}
+
+          <a href="{% url 'mood_create' %}" class="form__moods__create">
+            Add mood
+          </a>
+        </div>
+
+        <div class="form__moods">
+          {% for mood in form.fields.mood.queryset %}
+            <label for="id_mood_{{ mood.id }}" class="form__moods__mood action">
+              <div class="form__moods__color" style="background: {{mood.color}}">
+              </div>
+              <input type="radio" name="mood" id="id_mood_{{ mood.id }}" value="{{ mood.id }}" {% if entry.mood.id == mood.id %}checked{% endif %}>
+              {{ mood.name }}
+            </label>
+          {% endfor %}
+        </div>
+      </fieldset>
+    {% else %}
+      <p>
+        {{ field.label_tag }} {{ field }}
+      </p>
+    {% endif %}
+  {% endfor %}
+{% endblock form_body %}
 {% block submit_text %}Update{% endblock submit_text %}

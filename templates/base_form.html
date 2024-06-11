@@ -15,7 +15,7 @@
 {% block content %}
   {% include 'includes/app_header.html' %}
 
-  <main class="main main--form {% block main_classes %}{% endblock main_classes %}">
+  <main class="main main--form {% block main_classes %}{% endblock main_classes %}" hx-history="false">
     <div class="window">
       <div class="window__bar">
         <div class="window__bar__controls">
@@ -25,6 +25,7 @@
         </div>
         <span class="window__bar__close"></span>
       </div>
+
       <form
         method="post"
         class="form {% block form_classes %}{% endblock form_classes %}"
@@ -35,7 +36,6 @@
           {% endblock form_header %}
         </h2>
 
-        {% csrf_token %}
         {% block form_body %}
           {{ form.as_p }}
         {% endblock form_body %}
