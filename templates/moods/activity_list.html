@@ -8,7 +8,7 @@
   {% include 'includes/app_header.html' %}
 
   <main class="main main--activities">
-    <ul class="activities list">
+    <ul class="activities">
       {% for activity in activities %}
         <li class="activity action">
           <a href="{% url 'activity_update' activity.sqid %}">

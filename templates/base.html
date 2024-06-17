@@ -21,12 +21,11 @@
       <script src="{% static 'js/htmx.min.js' %}" defer></script>
     {% endif %}
 
-
     {% block extra_js %}
     {% endblock extra_js %}
   </head>
 
-  <body class="body {% block body_class %}{% endblock %}" hx-boost="true" hx-push-url="true" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+  <body class="body {% block body_class %}{% endblock %}" hx-boost="true" hx-push-url="true" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' {% if debug %}hx-history="false"{% endif %}>
     {% block content %}
     {% endblock content %}
   </body>

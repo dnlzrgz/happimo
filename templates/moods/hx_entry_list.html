@@ -13,16 +13,14 @@
     <p class="entry__note">{{ entry.note_title }}</p>
 
     {% if entry.activities.all %}
-      <ul class="entry__activities list">
+      <ul class="entry__activities">
         {% for activity in entry.activities.all %}
           <li class="entry__activity">{{ activity.name }}</li>
         {% endfor %}
       </ul>
     {% endif %}
   </a>
-{% endfor %}
-
-{% if page_obj.has_next %}
+{% endfor %} {% if page_obj.has_next %}
   <span
     class="next-page-loader"
     hx-get="/app/?page={{page_obj.next_page_number}}"

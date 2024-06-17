@@ -14,7 +14,7 @@ class EntryListView(LoginRequiredMixin, ListView):
     model = Entry
     context_object_name = "entries"
     template_name = "moods/entry_list.html"
-    paginate_by = 45
+    paginate_by = 48
 
     def get(self, request, *args, **kwargs):
         if request.headers.get("X-Next-Page"):
@@ -25,11 +25,9 @@ class EntryListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return (
             Entry.objects.filter(user=self.request.user)
-            .prefetch_related(
-                "activities",
-                "mood",
-            )
-            .only("mood", "note_title", "date", "time")
+            .select_related("mood")
+            .prefetch_related("activities")
+            .only("mood__color", "note_title", "date", "time")
         )
 
 
