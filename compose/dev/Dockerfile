@@ -1,5 +1,5 @@
 # Alias for the specific Python version
-FROM python:3.12.3-slim-bookworm as python
+FROM python:3.12.4-slim-bookworm as python
 
 # Build stage
 FROM python as build-stage

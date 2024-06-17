@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "happimo"
-version = "0.0.1"
+version = "0.1.0"
 description = "Self-hosted and Open-Source mood tracking and journal application."
 authors = ["dnlzrgz <24715931+dnlzrgz@users.noreply.github.com>"]
 license = "GPL-3.0"

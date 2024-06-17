@@ -30,7 +30,7 @@ services:
       - happimo_dev_postgres_data_backups:/backups
 
   memcached:
-    image: memcached:1.6.27-alpine3.20
+    image: memcached:1.6.28-alpine3.20
     container_name: happimo_dev_memcached
     depends_on:
       - postgres
