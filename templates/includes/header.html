@@ -1,0 +1,17 @@
+{% load static %}
+
+<header class="header" id="header">
+  <nav class="nav">
+    <a href="{% url 'home' %}" class="nav__home">Happimo</a>
+
+    <ul class="nav__items">
+      <a href="{% url 'entry_create' %}" class="nav__item nav__item--add">
+        New entry
+        <img src="{% static 'icons/plus.svg' %}" alt="Add" class="icon" />
+      </a>
+      <button class="nav__item nav__item--menu" _="on click add .open to #sidebar">
+        <img src="{% static 'icons/menu.svg' %}" alt="Menu" class="icon" />
+      </button>
+    </ul>
+  </nav>
+</header>

@@ -1,0 +1,26 @@
+{% load static %}
+
+<aside class="sidebar" id="sidebar">
+  <button class="sidebar__close" _="on click remove .open from #sidebar">
+    <img src="{% static 'icons/x.svg' %}" alt="Close" class="icon" />
+  </button>
+
+  <nav class="sidebar__nav">
+    <a href="{% url 'entry_list' %}">
+      Entries
+      <img src="{% static 'icons/arrow-right.svg' %}" class="icon" />
+    </a>
+    <a href="{% url 'mood_list' %}">
+      Moods
+      <img src="{% static 'icons/arrow-right.svg' %}" class="icon" />
+    </a>
+    <a href="{% url 'activity_list' %}">
+      Activities
+      <img src="{% static 'icons/arrow-right.svg' %}" class="icon" />
+    </a>
+    <a href="{% url 'settings' %}">
+      Settings
+      <img src="{% static 'icons/arrow-right.svg' %}" class="icon" />
+    </a>
+  </nav>
+</aside>
