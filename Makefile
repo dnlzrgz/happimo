@@ -33,12 +33,18 @@ update:
 	pre-commit autoupdate
 	@echo "✨ Update complete!"
 
-# Download v1.9.12 of htmx
+# Download v2.0.0 of htmx
 download-htmx:
 	@echo "📥 Downloading htmx scripts..."
-	curl -sL https://unpkg.com/htmx.org@1.9.12/dist/htmx.js -o static/js/htmx.js
-	curl -sL https://unpkg.com/htmx.org@1.9.12/dist/htmx.min.js -o static/js/htmx.min.js
+	curl -sL https://unpkg.com/htmx.org@2.0.0/dist/htmx.js -o static/js/htmx.js
+	curl -sL https://unpkg.com/htmx.org@2.0.0/dist/htmx.min.js -o static/js/htmx.min.js
 	@echo "✨ htmx scripts downloaded and saved!"
+
+# Download v0.9.12 of _hyperscript
+download_hyperscript:
+	@echo "📥 Downloading _hyperscript script..."
+	curl -sL https://unpkg.com/hyperscript.org@0.9.12 -o static/js/hyperscript.min.js
+	@echo "✨ _hyperscript script downloaded and saved!"
 
 # Run tests
 test:
@@ -78,6 +84,7 @@ dev-restart:
 # Setup project
 setup:
 	@make download-htmx
+	@make download_hyperscript
 	poetry install
 	pre-commit install
 	pre-commit run --all-files

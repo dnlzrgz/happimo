@@ -15,8 +15,6 @@ services:
       - .:/app
     depends_on:
       - postgres
-      - mailpit
-      - memcached
 
   postgres:
     image: postgres:16.3-alpine3.20
@@ -28,15 +26,3 @@ services:
     volumes:
       - happimo_dev_postgres_data:/var/lib/postgresql/data
       - happimo_dev_postgres_data_backups:/backups
-
-  memcached:
-    image: memcached:1.6.28-alpine3.20
-    container_name: happimo_dev_memcached
-    depends_on:
-      - postgres
-
-  mailpit:
-    image: axllent/mailpit:v1.18
-    container_name: happimo_dev_mailpit
-    ports:
-      - "8025:8025"
