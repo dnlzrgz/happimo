@@ -23,10 +23,15 @@ faker = "^25.1.0"
 pre-commit = "^3.7.0"
 commitizen = "^3.25.0"
 djhtml = "^3.0.6"
-ruff = "^0.4.3"
+ruff = "^0.5.0"
 django-browser-reload = "^1.12.1"
 django-silk = "^5.1.0"
 django-debug-toolbar = "^4.3.0"
+
+
+[tool.poetry.group.tests.dependencies]
+ruff = "^0.5.1"
+pre-commit = "^3.7.1"
 
 [build-system]
 requires = ["poetry-core"]

@@ -1,0 +1,36 @@
+volumes:
+  happimo_postgres_data: {}
+  happimo_postgres_data_backups: {}
+
+services:
+  web-dev:
+    build:
+      context: .
+      dockerfile: ./compose/dev/Dockerfile
+    image: happimo_dev
+    container_name: happimo_web_dev
+    profiles: [development]
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16.3-alpine3.20
+    container_name: happimo_postgres
+    environment:
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+      - POSTGRES_DB=$POSTGRES_DB
+    volumes:
+      - happimo_postgres_data:/var/lib/postgresql/data
+      - happimo_postgres_data_backups:/backups
+
+  cache:
+    image: redis:7.2.5-alpine3.20
+    container_name: portfolio_redis
+    profiles: [production, local]
+    depends_on:
+      - db
