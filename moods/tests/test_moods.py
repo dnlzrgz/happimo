@@ -54,6 +54,11 @@ class MoodCreateViewTest(TestCase, TestAuthenticatedViewAccessMixin):
             Mood.objects.filter(name=mood_data["name"], user=self.user).exists()
         )
 
+    def test_correct_relative_order(self):
+        for i in range(5):
+            mood = create_fake_mood(self.user)
+            self.assertEqual(mood.relative_order, i + 1)
+
 
 class MoodUpdateViewTest(TestCase, TestAuthenticatedViewAccessMixin):
     def setUp(self):
@@ -103,23 +108,17 @@ class MoodDeleteViewTest(TestCase, TestAuthenticatedViewAccessMixin):
         )
         self.template_name = "moods/mood_delete_form.html"
 
-    def test_owner_can_delete_activity(self):
+    def test_owner_can_delete_mood(self):
         self.client.login(**self.credentials)
         response = self.client.post(self.url)
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND.value)
         self.assertFalse(Mood.objects.filter(pk=self.mood.pk).exists())
 
-    def test_non_owner_cannot_delete_activity(self):
-        new_mood = create_fake_mood(self.user)
-        new_mood_url = reverse(
-            "mood_delete",
-            kwargs={"slug": self.mood.sqid},
-        )
-
+    def test_non_owner_cannot_delete_mood(self):
         other_credentials, _ = create_fake_user()
         self.client.login(**other_credentials)
-        response = self.client.post(new_mood_url)
+        response = self.client.post(self.url)
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND.value)
-        self.assertTrue(Mood.objects.filter(pk=new_mood.pk).exists())
+        self.assertTrue(Mood.objects.filter(pk=self.mood.pk).exists())
