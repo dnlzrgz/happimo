@@ -6,5 +6,6 @@ class MoodsConfig(AppConfig):
     name = "moods"
 
     def ready(self):
+        import moods.signals  # noqa: F401
 
         pass

@@ -122,3 +122,25 @@ class MoodDeleteViewTest(TestCase, TestAuthenticatedViewAccessMixin):
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND.value)
         self.assertTrue(Mood.objects.filter(pk=self.mood.pk).exists())
+
+    def test_delete_mood_maintains_correct_relative_order(self):
+        self.assertEqual(self.mood.relative_order, 1)
+        NUM_MOODS = 5
+
+        moods = []
+        for i in range(NUM_MOODS):
+            mood = create_fake_mood(self.user)
+            self.assertEqual(mood.relative_order, i + 2)
+
+            moods.append(mood)
+
+        self.assertEqual(len(moods), NUM_MOODS)
+        self.assertEqual(moods[-1].relative_order, NUM_MOODS + 1)
+
+        self.client.login(**self.credentials)
+        self.client.post(self.url)
+        self.assertFalse(Mood.objects.filter(pk=self.mood.pk).exists())
+
+        last_mood = moods.pop()
+        last_mood.refresh_from_db()
+        self.assertEqual(last_mood.relative_order, NUM_MOODS)
