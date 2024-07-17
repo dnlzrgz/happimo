@@ -144,3 +144,35 @@ class MoodDeleteViewTest(TestCase, TestAuthenticatedViewAccessMixin):
         last_mood = moods.pop()
         last_mood.refresh_from_db()
         self.assertEqual(last_mood.relative_order, NUM_MOODS)
+
+
+class MoodReorderViewTest(TestCase):
+    def setUp(self):
+        self.credentials, self.user = create_fake_user()
+        self.moods = [create_fake_mood(self.user) for _ in range(5)]
+        self.url = reverse("mood_reorder")
+
+    def test_authenticated_user_can_reorder_moods(self):
+        self.client.login(**self.credentials)
+        new_mood_order = [mood.sqid for mood in [self.moods[-1]] + self.moods[:-1]]
+
+        response = self.client.post(
+            self.url,
+            data={"mood": new_mood_order},
+            HTTP_HX_REQUEST="true",
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.OK.value)
+        self.assertTemplateUsed(response, "moods/hx_mood_list.html")
+
+        for i, mood_sqid in enumerate(new_mood_order):
+            mood = Mood.objects.get(sqid=mood_sqid)
+            self.assertEqual(mood.relative_order, i + 1)
+
+    def test_non_htmx_request_returns_bad_request(self):
+        self.client.login(**self.credentials)
+        new_mood_order = [mood.sqid for mood in self.moods]
+
+        response = self.client.post(self.url, data={"mood": new_mood_order})
+
+        self.assertEqual(response.status_code, HTTPStatus.BAD_REQUEST.value)

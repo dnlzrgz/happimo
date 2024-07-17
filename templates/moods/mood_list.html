@@ -1,33 +1,37 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block title %}Happimo - Moods{% endblock title %}
 
-{% block body_class %}body--moods{% endblock %}
+{% block extra_js %}
+  {% if debug %}
+    <script src="{% static 'js/html5sortable.js' %}" defer></script>
+  {% else %}
+    <script src="{% static 'js/html5sortable.min.js' %}" defer></script>
+  {% endif %}
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      sortable('.moods', {
+        forcePlaceholderSize: true,
+        placeholderClass: 'mood',
+      });
+    });
+  </script>
+{% endblock extra_js %}
 
 {% block content %}
-  {% include 'includes/app_header.html' %}
-
   <main class="main main--moods">
-    <ul class="moods">
-      {% for mood in moods %}
-        <li class="mood action">
-          <a href="{% url 'mood_update' mood.sqid %}">
-            <div class="mood__color" style="background-color: {{ mood.color }};">
-            </div>
-            <p class="mood__name">
-              {{mood.name}}
-            </p>
-          </a>
-        </li>
-      {% endfor %}
-    </ul>
+    <form class="moods" role="list" hx-post="{% url 'mood_reorder' %}" hx-trigger="sortupdate" hx-push-url="false">
+      {% include 'moods/hx_mood_list.html' %}
+    </form>
 
-    <div class="actions-container">
-      <a
-        href="{% url 'mood_create' %}"
-        class="action action--add">
-        Add new mood
-      </a>
-    </main>
-  </div>
+    <a
+      href="{% url 'mood_create' %}"
+      class="button button--add">
+      New mood
+      <img src="{% static 'icons/plus.svg' %}" alt="Add" class="icon" />
+    </a>
+  </main>
 {% endblock content %}

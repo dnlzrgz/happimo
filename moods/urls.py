@@ -10,6 +10,7 @@ from moods.views.mood_views import (
     MoodDeleteView,
     MoodListView,
     MoodUpdateView,
+    MoodReorderView,
 )
 from moods.views.activity_views import (
     ActivityCreateView,
@@ -53,6 +54,11 @@ urlpatterns = [
         "moods/update/<slug>",
         MoodUpdateView.as_view(),
         name="mood_update",
+    ),
+    path(
+        "moods/reorder/",
+        MoodReorderView.as_view(),
+        name="mood_reorder",
     ),
     path(
         "moods/delete/<slug>",

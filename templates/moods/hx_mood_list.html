@@ -1,0 +1,15 @@
+{% for mood in moods %}
+  <a
+    id="{{ mood.sqid }}"
+    role="listitem"
+    href="{% url 'mood_update' mood.sqid %}"
+    draggable="true"
+    class="mood"
+  >
+    <div class="mood__color" style="background-color: {{ mood.color }};"></div>
+
+    <p class="mood__name">{{mood.name}}</p>
+
+    <input type="hidden" name="mood" value="{{ mood.sqid }}" />
+  </a>
+{% endfor %}

@@ -1,5 +1,9 @@
+from django.shortcuts import render
+from django.db import models
 from django.urls import reverse_lazy
-from django.http import HttpResponseRedirect
+from django.db.models import Case, When, F
+from django.http import HttpResponseRedirect, HttpResponseBadRequest
+from django.views import View
 from django.views.generic import (
     ListView,
     CreateView,
@@ -56,6 +60,31 @@ class MoodUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         return self.get_object().user == self.request.user
+
+    def handle_no_permission(self):
+        return HttpResponseRedirect(reverse_lazy("home"))
+
+
+class MoodReorderView(LoginRequiredMixin, View):
+    def post(self, request):
+        if request.headers.get("HX-REQUEST"):
+            new_mood_order = request.POST.getlist("mood")
+            Mood.objects.filter(user=request.user, sqid__in=new_mood_order).update(
+                relative_order=Case(
+                    *[
+                        When(sqid=sqid, then=i + 1)
+                        for i, sqid in enumerate(new_mood_order)
+                    ],
+                    default=F("relative_order"),
+                    output_field=models.PositiveSmallIntegerField(),
+                )
+            )
+
+            moods = Mood.objects.filter(user=request.user)
+            context = {"moods": moods}
+            return render(request, "moods/hx_mood_list.html", context)
+        else:
+            return HttpResponseBadRequest()
 
     def handle_no_permission(self):
         return HttpResponseRedirect(reverse_lazy("home"))
