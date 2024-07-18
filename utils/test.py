@@ -2,9 +2,20 @@ import random
 from django.contrib.auth import get_user_model
 from faker import Faker
 from moods.models import Activity, Entry, Mood
-from utils.dummy import FEELINGS_LIST, ACTIVITY_LIST
 
 fake = Faker()
+
+
+def generate_activity() -> str:
+    generators = [
+        lambda: f"{fake.word(part_of_speech='verb').capitalize()} a {fake.word(part_of_speech='noun')}",
+        lambda: f"{fake.word(part_of_speech='adjective').capitalize()} {fake.word(part_of_speech='noun')}",
+        lambda: f"{fake.word(part_of_speech='verb').capitalize()} {fake.word(part_of_speech='adverb')}",
+        lambda: f"{fake.word(part_of_speech='verb').capitalize()} with {fake.first_name()}",
+        lambda: f"{fake.word(part_of_speech='adjective').capitalize()} {fake.job()}",
+    ]
+
+    return random.choice(generators)()
 
 
 def create_fake_user():
@@ -39,7 +50,7 @@ def create_fake_entry(user, mood, activities=None):
 def create_fake_mood(user):
     mood = Mood.objects.create(
         user=user,
-        name=random.choice(FEELINGS_LIST),
+        name=fake.word().capitalize(),
         color=fake.color(),
     )
 
@@ -49,7 +60,7 @@ def create_fake_mood(user):
 def create_fake_activity(user):
     activity = Activity.objects.create(
         user=user,
-        name=random.choice(ACTIVITY_LIST),
+        name=generate_activity(),
     )
 
     return activity

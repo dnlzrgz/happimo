@@ -1,9 +1,7 @@
-import random
 from http import HTTPStatus
 from django.test import TestCase
 from django.urls import reverse
 from moods.models import Activity
-from utils.dummy import ACTIVITY_LIST
 from utils.test import create_fake_user, create_fake_activity
 from utils.test_mixins import TestAuthenticatedViewAccessMixin
 
@@ -41,7 +39,7 @@ class ActivityCreateViewTest(TestCase, TestAuthenticatedViewAccessMixin):
     def test_authenticated_user_can_create_activity(self):
         self.client.login(**self.credentials)
         activity_data = {
-            "name": random.choice(ACTIVITY_LIST),
+            "name": "Painting",
         }
 
         response = self.client.post(self.url, data=activity_data)
@@ -65,7 +63,7 @@ class ActivityUpdateViewTest(TestCase, TestAuthenticatedViewAccessMixin):
     def test_authenticated_user_can_update_activity(self):
         self.client.login(**self.credentials)
         new_activity_data = {
-            "name": random.choice(ACTIVITY_LIST),
+            "name": "Reading",
         }
 
         response = self.client.post(self.url, data=new_activity_data)
@@ -82,7 +80,7 @@ class ActivityUpdateViewTest(TestCase, TestAuthenticatedViewAccessMixin):
         other_credentials, _ = create_fake_user()
         self.client.login(**other_credentials)
         new_activity_data = {
-            "name": random.choice(ACTIVITY_LIST),
+            "name": "Jogging",
         }
 
         response = self.client.post(self.url, data=new_activity_data)

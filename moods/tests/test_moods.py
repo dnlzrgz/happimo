@@ -1,9 +1,7 @@
-import random
 from http import HTTPStatus
 from django.test import TestCase
 from django.urls import reverse
 from moods.models import Mood
-from utils.dummy import FEELINGS_LIST
 from utils.test import create_fake_user, create_fake_mood
 from utils.test_mixins import TestAuthenticatedViewAccessMixin
 
@@ -43,7 +41,7 @@ class MoodCreateViewTest(TestCase, TestAuthenticatedViewAccessMixin):
     def test_authenticated_user_can_create_mood(self):
         self.client.login(**self.credentials)
         mood_data = {
-            "name": random.choice(FEELINGS_LIST),
+            "name": "Good",
             "color": "#145465",
         }
 
@@ -73,7 +71,7 @@ class MoodUpdateViewTest(TestCase, TestAuthenticatedViewAccessMixin):
     def test_authenticated_user_can_update_mood(self):
         self.client.login(**self.credentials)
         new_mood_data = {
-            "name": random.choice(FEELINGS_LIST),
+            "name": "Happy",
             "color": "#ff0000",
         }
 
@@ -88,9 +86,7 @@ class MoodUpdateViewTest(TestCase, TestAuthenticatedViewAccessMixin):
     def test_user_can_not_update_other_users_moods(self):
         other_credentials, _ = create_fake_user()
         self.client.login(**other_credentials)
-        new_mood_data = {
-            "name": random.choice(FEELINGS_LIST),
-        }
+        new_mood_data = {"name": "Sad"}
 
         response = self.client.post(self.url, data=new_mood_data)
 
@@ -173,6 +169,11 @@ class MoodReorderViewTest(TestCase):
         self.client.login(**self.credentials)
         new_mood_order = [mood.sqid for mood in self.moods]
 
-        response = self.client.post(self.url, data={"mood": new_mood_order})
+        response = self.client.post(
+            self.url,
+            data={
+                "mood": new_mood_order,
+            },
+        )
 
         self.assertEqual(response.status_code, HTTPStatus.BAD_REQUEST.value)
