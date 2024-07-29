@@ -7,7 +7,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -16,37 +15,84 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Activity',
+            name="Activity",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=75)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=75)),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Mood',
+            name="Mood",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=75)),
-                ('icon', models.CharField(max_length=4)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=75)),
+                ("icon", models.CharField(max_length=4)),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Entry',
+            name="Entry",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('note_title', models.CharField(blank=True, max_length=255)),
-                ('note_body', models.TextField(blank=True)),
-                ('date', models.DateField(default=django.utils.timezone.now)),
-                ('time', models.TimeField(default=django.utils.timezone.now)),
-                ('last_modified', models.DateTimeField(auto_now=True)),
-                ('activities', models.ManyToManyField(blank=True, to='moods.activity')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-                ('mood', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='moods.mood')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("note_title", models.CharField(blank=True, max_length=255)),
+                ("note_body", models.TextField(blank=True)),
+                ("date", models.DateField(default=django.utils.timezone.now)),
+                ("time", models.TimeField(default=django.utils.timezone.now)),
+                ("last_modified", models.DateTimeField(auto_now=True)),
+                ("activities", models.ManyToManyField(blank=True, to="moods.activity")),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "mood",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="moods.mood"
+                    ),
+                ),
             ],
             options={
-                'ordering': ['-date', '-time'],
+                "ordering": ["-date", "-time"],
             },
         ),
     ]

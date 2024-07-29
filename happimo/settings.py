@@ -2,6 +2,7 @@
 Django settings for happimo project.
 """
 
+import django
 from pathlib import Path
 from environs import Env
 
@@ -58,6 +59,7 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "django.forms",
     # Static files
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
@@ -103,6 +105,7 @@ TEMPLATES = [
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
             BASE_DIR / "templates",
+            django.__path__[0] + "/forms/templates",
         ],
         "APP_DIRS": True,
         "OPTIONS": {

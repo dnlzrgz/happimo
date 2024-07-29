@@ -1,8 +1,8 @@
 # Alias for the specific Python version
-FROM python:3.12.4-slim-bookworm as python
+FROM python:3.12.4-slim-bookworm AS python
 
 # Build stage
-FROM python as build-stage
+FROM python AS build-stage
 
 WORKDIR /app
 
@@ -16,7 +16,7 @@ COPY ./requirements.dev.txt .
 RUN pip wheel --no-cache-dir --no-deps --wheel-dir /app/wheels -r requirements.dev.txt
 
 # Run stage
-FROM python as run-stage
+FROM python AS run-stage
 
 WORKDIR /app
 

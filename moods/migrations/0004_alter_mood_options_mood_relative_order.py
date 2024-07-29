@@ -5,19 +5,20 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('moods', '0003_alter_mood_color'),
+        ("moods", "0003_alter_mood_color"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='mood',
-            options={'ordering': ['-relative_order']},
+            name="mood",
+            options={"ordering": ["-relative_order"]},
         ),
         migrations.AddField(
-            model_name='mood',
-            name='relative_order',
-            field=models.PositiveSmallIntegerField(default=0, validators=[django.core.validators.MinValueValidator(0)]),
+            model_name="mood",
+            name="relative_order",
+            field=models.PositiveSmallIntegerField(
+                default=0, validators=[django.core.validators.MinValueValidator(0)]
+            ),
         ),
     ]

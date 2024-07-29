@@ -5,15 +5,14 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('moods', '0002_alter_activity_options_alter_entry_options_and_more'),
+        ("moods", "0002_alter_activity_options_alter_entry_options_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='mood',
-            name='color',
-            field=moods.form_fields.ColorField(default='#7542e6', max_length=8),
+            model_name="mood",
+            name="color",
+            field=moods.form_fields.ColorField(default="#7542e6", max_length=8),
         ),
     ]
