@@ -5,18 +5,19 @@ clean:
 	find . -type d -name "__pycache__" -delete
 	@echo "✨ Clean up complete!"
 
-# Run format with Ruff and djhtml
-format:
-	@echo "🔍 Formatting..."
-	ruff check . --fix
-	djhtml .
-	@echo "✨ Format complete!"
-
-# Run pre-commit
+# Lint with Ruff and djhtml
 lint:
 	@echo "🔍 Linting..."
+	ruff check . --fix
+	ruff format .
+	djhtml .
+	@echo "✨ Lint complete!"
+
+# Run pre-commit
+pre:
+	@echo "🔍 Running pre-commit..."
 	pre-commit run --all-files
-	@echo "✨ Linting complete!"
+	@echo "✨ Task complete!"
 
 # Check using Django's system-check
 check:
@@ -48,7 +49,7 @@ collect:
 # Start development Docker compose
 dev-start:
 	@echo "🚀 Starting development Docker compose..."
-	docker compose --profile development up
+	docker compose --profile development up --build
 	@echo "✨ Development Docker compose started!"
 
 # Stop development Docker compose

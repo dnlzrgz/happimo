@@ -41,8 +41,8 @@ def create_fake_entry(user, mood, activities=None):
     )
 
     if activities:
-        for activity in activities:
-            entry.activities.add(*Activity.objects.filter(name__in=activity))
+        activity_objects = Activity.objects.filter(name__in=activities)
+        entry.activities.set(activity_objects)
 
     return entry
 
