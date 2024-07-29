@@ -1,8 +1,6 @@
-import random
 from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand, CommandError
-from moods.models import Activity
-from utils.dummy import ACTIVITY_LIST
+from utils.test import create_fake_activity
 
 
 class Command(BaseCommand):
@@ -14,7 +12,7 @@ class Command(BaseCommand):
             "-n",
             type=int,
             help="Number of activities",
-            default=len(ACTIVITY_LIST) // 2,
+            default=5,
         )
 
         parser.add_argument(
@@ -22,6 +20,7 @@ class Command(BaseCommand):
             nargs="+",
             type=str,
             help="List of users by username",
+            required=True,
         )
 
     def handle(self, *args, **options):
@@ -31,18 +30,11 @@ class Command(BaseCommand):
             try:
                 user = get_user_model().objects.get(username=username)
 
-                activities = [
-                    Activity(
-                        user=user,
-                        name=activity,
-                    )
-                    for activity in random.sample(ACTIVITY_LIST, n)
-                ]
-
-                Activity.objects.bulk_create(activities)
+                for _ in range(n):
+                    create_fake_activity(user=user)
 
                 self.stdout.write(
-                    self.style.SUCCESS(f"Successfully added activities to {user}")
+                    self.style.SUCCESS(f"Successfully added {n} activities to {user}")
                 )
             except get_user_model().DoesNotExist:
                 raise CommandError(f"User {username} does not exist!")
